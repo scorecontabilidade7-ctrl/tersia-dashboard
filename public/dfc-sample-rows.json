@@ -1,0 +1,3676 @@
+{
+  "sheetName": "DFC MÊS",
+  "totalRows": 1653,
+  "sample": [
+    {
+      "rowIdx": 6,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "RESUMO"
+        }
+      ]
+    },
+    {
+      "rowIdx": 8,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "2 - Saldo Inicial em Caixa"
+        },
+        {
+          "colIdx": 2,
+          "val": 48906.07
+        },
+        {
+          "colIdx": 3,
+          "val": 48906.07
+        }
+      ]
+    },
+    {
+      "rowIdx": 9,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "3 - Faturamento  (+)"
+        },
+        {
+          "colIdx": 2,
+          "val": 791992.0900000001
+        },
+        {
+          "colIdx": 3,
+          "val": 609925.6000000002
+        }
+      ]
+    },
+    {
+      "rowIdx": 10,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "4 - Custos Variáveis Total (=) (-)"
+        },
+        {
+          "colIdx": 2,
+          "val": 640918.35
+        },
+        {
+          "colIdx": 3,
+          "val": 425685.91000000003
+        },
+        {
+          "colIdx": 4,
+          "val": 0.6979308787825923
+        }
+      ]
+    },
+    {
+      "rowIdx": 11,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "  4.1 - Custos tributários ou Financeiros (-)"
+        },
+        {
+          "colIdx": 2,
+          "val": 6379.130000000001
+        },
+        {
+          "colIdx": 3,
+          "val": 2727.3399999999997
+        }
+      ]
+    },
+    {
+      "rowIdx": 12,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "  4.2 - Custos com Fornecedores (-)"
+        },
+        {
+          "colIdx": 2,
+          "val": 631039.22
+        },
+        {
+          "colIdx": 3,
+          "val": 390570.57
+        }
+      ]
+    },
+    {
+      "rowIdx": 13,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "  4.3 - Embalagens (-)"
+        },
+        {
+          "colIdx": 2,
+          "val": 0
+        },
+        {
+          "colIdx": 3,
+          "val": 0
+        }
+      ]
+    },
+    {
+      "rowIdx": 14,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "  4.4 - Despesas de Viagens (-)"
+        },
+        {
+          "colIdx": 2,
+          "val": 3500
+        },
+        {
+          "colIdx": 3,
+          "val": 32388
+        }
+      ]
+    },
+    {
+      "rowIdx": 15,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "Margem de Contribuição (= )"
+        },
+        {
+          "colIdx": 2,
+          "val": 151073.7400000001
+        },
+        {
+          "colIdx": 3,
+          "val": 184239.69000000018
+        },
+        {
+          "colIdx": 4,
+          "val": 0.3020691212174077
+        }
+      ]
+    },
+    {
+      "rowIdx": 16,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "5 - Despesas Gerais Administrativas (-)"
+        },
+        {
+          "colIdx": 2,
+          "val": 99978.54
+        },
+        {
+          "colIdx": 3,
+          "val": 66643.59
+        },
+        {
+          "colIdx": 4,
+          "val": 0.10926511364664801
+        }
+      ]
+    },
+    {
+      "rowIdx": 17,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "  5.1 - Administrativas (-)"
+        },
+        {
+          "colIdx": 2,
+          "val": 29542.03
+        },
+        {
+          "colIdx": 3,
+          "val": 16195.600000000002
+        }
+      ]
+    },
+    {
+      "rowIdx": 18,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "  5.2 - Pessoal (-)"
+        },
+        {
+          "colIdx": 2,
+          "val": 62806.979999999996
+        },
+        {
+          "colIdx": 3,
+          "val": 44564.42999999999
+        }
+      ]
+    },
+    {
+      "rowIdx": 19,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "  5.3 - Despesas com Materiais e Equipamentos (-)"
+        },
+        {
+          "colIdx": 2,
+          "val": 6070
+        },
+        {
+          "colIdx": 3,
+          "val": 2770
+        }
+      ]
+    },
+    {
+      "rowIdx": 20,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "  5.4 - Despesas com Veículos (-)"
+        },
+        {
+          "colIdx": 2,
+          "val": 260
+        },
+        {
+          "colIdx": 3,
+          "val": 2230.56
+        }
+      ]
+    },
+    {
+      "rowIdx": 21,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "  5.5 - Despesas Financeiras (-)"
+        },
+        {
+          "colIdx": 2,
+          "val": 1299.5300000000004
+        },
+        {
+          "colIdx": 3,
+          "val": 882.9999999999999
+        }
+      ]
+    },
+    {
+      "rowIdx": 22,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "Lucro Operacional Antes dos Investimentos (=)"
+        },
+        {
+          "colIdx": 2,
+          "val": 51095.20000000011
+        },
+        {
+          "colIdx": 3,
+          "val": 117596.10000000018
+        },
+        {
+          "colIdx": 4,
+          "val": 0.1928040075707597
+        }
+      ]
+    },
+    {
+      "rowIdx": 23,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "6 - Investimentos (-)"
+        },
+        {
+          "colIdx": 2,
+          "val": 3310
+        },
+        {
+          "colIdx": 3,
+          "val": 2700
+        },
+        {
+          "colIdx": 4,
+          "val": 0.004426769428927068
+        }
+      ]
+    },
+    {
+      "rowIdx": 24,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "  6.1 - Investimentos em Marketing  (-)"
+        },
+        {
+          "colIdx": 2,
+          "val": 1550
+        },
+        {
+          "colIdx": 3,
+          "val": 1200
+        }
+      ]
+    },
+    {
+      "rowIdx": 25,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "  6.2 - Investimentos em Bens Materiais (-)"
+        },
+        {
+          "colIdx": 2,
+          "val": 260
+        },
+        {
+          "colIdx": 3,
+          "val": 0
+        }
+      ]
+    },
+    {
+      "rowIdx": 26,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "  6.3 - Investimentos em Desenvolvimento Empresarial  (-)"
+        },
+        {
+          "colIdx": 2,
+          "val": 1500
+        },
+        {
+          "colIdx": 3,
+          "val": 1500
+        }
+      ]
+    },
+    {
+      "rowIdx": 27,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "6- Lucro Operacional (=)"
+        },
+        {
+          "colIdx": 2,
+          "val": 47785.20000000011
+        },
+        {
+          "colIdx": 3,
+          "val": 114896.10000000018
+        },
+        {
+          "colIdx": 4,
+          "val": 0.1883772381418326
+        }
+      ]
+    },
+    {
+      "rowIdx": 28,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "7 - Resultado Não Operacionais (+) (-)"
+        },
+        {
+          "colIdx": 2,
+          "val": -40798.43000000001
+        },
+        {
+          "colIdx": 3,
+          "val": -9711.81
+        },
+        {
+          "colIdx": 4,
+          "val": -0.015922942076869697
+        }
+      ]
+    },
+    {
+      "rowIdx": 29,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "  7.1 - Entradas não Operacionais (+)"
+        },
+        {
+          "colIdx": 2,
+          "val": 0.13
+        },
+        {
+          "colIdx": 3,
+          "val": 0.12000000000000001
+        }
+      ]
+    },
+    {
+      "rowIdx": 30,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "  7.2 - Saídas não operacionais (-)"
+        },
+        {
+          "colIdx": 2,
+          "val": 40798.560000000005
+        },
+        {
+          "colIdx": 3,
+          "val": 9711.93
+        }
+      ]
+    },
+    {
+      "rowIdx": 31,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "  7.3 - Acerto de Caixa/Transferências"
+        },
+        {
+          "colIdx": 2,
+          "val": -10247.030000000028
+        },
+        {
+          "colIdx": 3,
+          "val": 0
+        }
+      ]
+    },
+    {
+      "rowIdx": 32,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "8 - Lucro Líquido (=)"
+        },
+        {
+          "colIdx": 2,
+          "val": -3260.259999999922
+        },
+        {
+          "colIdx": 3,
+          "val": 105184.29000000018
+        },
+        {
+          "colIdx": 4,
+          "val": 0.17245429606496293
+        }
+      ]
+    },
+    {
+      "rowIdx": 33,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "9 - Saldo Acumulado (Inicial + Lucro)"
+        },
+        {
+          "colIdx": 2,
+          "val": -3260.259999999922
+        },
+        {
+          "colIdx": 3,
+          "val": 105184.29000000018
+        }
+      ]
+    },
+    {
+      "rowIdx": 36,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "DETALHADO"
+        }
+      ]
+    },
+    {
+      "rowIdx": 37,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "SALDO INICIAL"
+        },
+        {
+          "colIdx": 2,
+          "val": "REALIZADO"
+        },
+        {
+          "colIdx": 3,
+          "val": "REALIZADO"
+        },
+        {
+          "colIdx": 4,
+          "val": "ANALISE"
+        },
+        {
+          "colIdx": 5,
+          "val": "COMPARATIVO"
+        }
+      ]
+    },
+    {
+      "rowIdx": 38,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": 48906.07
+        },
+        {
+          "colIdx": 2,
+          "val": "JUNHO"
+        },
+        {
+          "colIdx": 3,
+          "val": "JULHO"
+        },
+        {
+          "colIdx": 4,
+          "val": "AV"
+        },
+        {
+          "colIdx": 5,
+          "val": "DIF"
+        },
+        {
+          "colIdx": 6,
+          "val": "AH"
+        }
+      ]
+    },
+    {
+      "rowIdx": 39,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "ENTRADAS TOTAL (+)"
+        },
+        {
+          "colIdx": 2,
+          "val": 791992.0900000001
+        },
+        {
+          "colIdx": 3,
+          "val": 609925.6000000002
+        },
+        {
+          "colIdx": 4,
+          "val": 1
+        },
+        {
+          "colIdx": 5,
+          "val": -182066.48999999987
+        },
+        {
+          "colIdx": 6,
+          "val": -0.22988422775788053
+        }
+      ]
+    },
+    {
+      "rowIdx": 40,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "3.1.1 Vendas em Dinheiro"
+        },
+        {
+          "colIdx": 2,
+          "val": 327721.9
+        },
+        {
+          "colIdx": 3,
+          "val": 237559.86
+        },
+        {
+          "colIdx": 4,
+          "val": 0.38948989844007187
+        },
+        {
+          "colIdx": 5,
+          "val": -90162.04000000004
+        },
+        {
+          "colIdx": 6,
+          "val": -0.27511753105300574
+        }
+      ]
+    },
+    {
+      "rowIdx": 41,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "3.1.2 Vendas Pix"
+        },
+        {
+          "colIdx": 2,
+          "val": 304847.39999999985
+        },
+        {
+          "colIdx": 3,
+          "val": 227644.04000000024
+        },
+        {
+          "colIdx": 4,
+          "val": 0.37323247294424133
+        },
+        {
+          "colIdx": 5,
+          "val": -77203.35999999961
+        },
+        {
+          "colIdx": 6,
+          "val": -0.25325247976528464
+        },
+        {
+          "colIdx": 7,
+          "val": 415864.09
+        }
+      ]
+    },
+    {
+      "rowIdx": 42,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "3.1.3 Vendas Débito"
+        },
+        {
+          "colIdx": 2,
+          "val": 81685.10000000006
+        },
+        {
+          "colIdx": 3,
+          "val": 58127.039999999964
+        },
+        {
+          "colIdx": 4,
+          "val": 0.09530185320963729
+        },
+        {
+          "colIdx": 5,
+          "val": -23558.0600000001
+        },
+        {
+          "colIdx": 6,
+          "val": -0.28840094460311716
+        },
+        {
+          "colIdx": 7,
+          "val": 327721.9
+        }
+      ]
+    },
+    {
+      "rowIdx": 43,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "3.1.4 Vendas Crédito"
+        },
+        {
+          "colIdx": 2,
+          "val": 49918.60000000005
+        },
+        {
+          "colIdx": 3,
+          "val": 69228.02000000002
+        },
+        {
+          "colIdx": 4,
+          "val": 0.11350240094857471
+        },
+        {
+          "colIdx": 5,
+          "val": 19309.41999999997
+        },
+        {
+          "colIdx": 6,
+          "val": 0.386818139931808
+        },
+        {
+          "colIdx": 7,
+          "val": 34546.43
+        }
+      ]
+    },
+    {
+      "rowIdx": 44,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "3.1.5 Vendas Cheque"
+        },
+        {
+          "colIdx": 2,
+          "val": 0
+        },
+        {
+          "colIdx": 3,
+          "val": 0
+        },
+        {
+          "colIdx": 4,
+          "val": 0
+        },
+        {
+          "colIdx": 5,
+          "val": 0
+        },
+        {
+          "colIdx": 7,
+          "val": 778132.42
+        }
+      ]
+    },
+    {
+      "rowIdx": 45,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "3.1.6 Vendas Boleto "
+        },
+        {
+          "colIdx": 2,
+          "val": 25923.03
+        },
+        {
+          "colIdx": 3,
+          "val": 15470.579999999998
+        },
+        {
+          "colIdx": 4,
+          "val": 0.025364700219174263
+        },
+        {
+          "colIdx": 5,
+          "val": -10452.45
+        },
+        {
+          "colIdx": 6,
+          "val": -0.4032109672364689
+        }
+      ]
+    },
+    {
+      "rowIdx": 46,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "3.1.7 Vale Refeição"
+        },
+        {
+          "colIdx": 2,
+          "val": 0
+        },
+        {
+          "colIdx": 3,
+          "val": 0
+        },
+        {
+          "colIdx": 4,
+          "val": 0
+        },
+        {
+          "colIdx": 5,
+          "val": 0
+        }
+      ]
+    },
+    {
+      "rowIdx": 47,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "3.1.8 Venda Máquina Terceiros"
+        },
+        {
+          "colIdx": 2,
+          "val": 0
+        },
+        {
+          "colIdx": 3,
+          "val": 0
+        },
+        {
+          "colIdx": 4,
+          "val": 0
+        },
+        {
+          "colIdx": 5,
+          "val": 0
+        }
+      ]
+    },
+    {
+      "rowIdx": 48,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "3.1.9 Crediário Funcionário"
+        },
+        {
+          "colIdx": 2,
+          "val": 1896.06
+        },
+        {
+          "colIdx": 3,
+          "val": 1896.06
+        },
+        {
+          "colIdx": 4,
+          "val": 0.003108674238300539
+        },
+        {
+          "colIdx": 5,
+          "val": 0
+        },
+        {
+          "colIdx": 6,
+          "val": 0
+        }
+      ]
+    },
+    {
+      "rowIdx": 49,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "3.1.10 Ted"
+        },
+        {
+          "colIdx": 2,
+          "val": 0
+        },
+        {
+          "colIdx": 3,
+          "val": 0
+        },
+        {
+          "colIdx": 4,
+          "val": 0
+        },
+        {
+          "colIdx": 5,
+          "val": 0
+        }
+      ]
+    },
+    {
+      "rowIdx": 50,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "3.1.99 Outros Produtos/Serviços"
+        },
+        {
+          "colIdx": 2,
+          "val": 0
+        },
+        {
+          "colIdx": 3,
+          "val": 0
+        },
+        {
+          "colIdx": 4,
+          "val": 0
+        },
+        {
+          "colIdx": 5,
+          "val": 0
+        }
+      ]
+    },
+    {
+      "rowIdx": 52,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "SAÍDAS (-)"
+        }
+      ]
+    },
+    {
+      "rowIdx": 53,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "Custos variáveis (=)"
+        },
+        {
+          "colIdx": 2,
+          "val": 640918.35
+        },
+        {
+          "colIdx": 3,
+          "val": 425685.91000000003
+        },
+        {
+          "colIdx": 4,
+          "val": 0.6979308787825923
+        },
+        {
+          "colIdx": 5,
+          "val": -215232.43999999994
+        },
+        {
+          "colIdx": 6,
+          "val": -0.3358188137381305
+        }
+      ]
+    },
+    {
+      "rowIdx": 54,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "Custos tributários ou Financeiros (-)"
+        },
+        {
+          "colIdx": 2,
+          "val": 6379.130000000001
+        },
+        {
+          "colIdx": 3,
+          "val": 2727.3399999999997
+        },
+        {
+          "colIdx": 4,
+          "val": 0.004471594568255536
+        },
+        {
+          "colIdx": 5,
+          "val": -3651.7900000000013
+        },
+        {
+          "colIdx": 6,
+          "val": -0.5724589403257185
+        }
+      ]
+    },
+    {
+      "rowIdx": 55,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "4.1.1 PIS / COFINS"
+        },
+        {
+          "colIdx": 2,
+          "val": 759.35
+        },
+        {
+          "colIdx": 3,
+          "val": 0
+        },
+        {
+          "colIdx": 4,
+          "val": 0
+        },
+        {
+          "colIdx": 5,
+          "val": -759.35
+        },
+        {
+          "colIdx": 6,
+          "val": -1
+        }
+      ]
+    },
+    {
+      "rowIdx": 56,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "4.1.3 IRPJ"
+        },
+        {
+          "colIdx": 2,
+          "val": 0
+        },
+        {
+          "colIdx": 3,
+          "val": 0
+        },
+        {
+          "colIdx": 4,
+          "val": 0
+        },
+        {
+          "colIdx": 5,
+          "val": 0
+        }
+      ]
+    },
+    {
+      "rowIdx": 57,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "4.1.4 ICMS"
+        },
+        {
+          "colIdx": 2,
+          "val": 0
+        },
+        {
+          "colIdx": 3,
+          "val": 2115.2999999999997
+        },
+        {
+          "colIdx": 4,
+          "val": 0.7755908687585706
+        },
+        {
+          "colIdx": 5,
+          "val": 2115.2999999999997
+        }
+      ]
+    },
+    {
+      "rowIdx": 58,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "4.1.5 CSLL"
+        },
+        {
+          "colIdx": 2,
+          "val": 0
+        },
+        {
+          "colIdx": 3,
+          "val": 0
+        },
+        {
+          "colIdx": 4,
+          "val": 0
+        },
+        {
+          "colIdx": 5,
+          "val": 0
+        }
+      ]
+    },
+    {
+      "rowIdx": 59,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "4.1.6 Taxas Débito"
+        },
+        {
+          "colIdx": 2,
+          "val": 0
+        },
+        {
+          "colIdx": 3,
+          "val": 0
+        },
+        {
+          "colIdx": 4,
+          "val": 0
+        },
+        {
+          "colIdx": 5,
+          "val": 0
+        }
+      ]
+    },
+    {
+      "rowIdx": 60,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "4.1.7 Taxas Crédito"
+        },
+        {
+          "colIdx": 2,
+          "val": 0
+        },
+        {
+          "colIdx": 3,
+          "val": 0
+        },
+        {
+          "colIdx": 4,
+          "val": 0
+        },
+        {
+          "colIdx": 5,
+          "val": 0
+        }
+      ]
+    },
+    {
+      "rowIdx": 61,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "4.1.8 Taxas de Cartão Alimentação"
+        },
+        {
+          "colIdx": 2,
+          "val": 0
+        },
+        {
+          "colIdx": 3,
+          "val": 0
+        },
+        {
+          "colIdx": 4,
+          "val": 0
+        },
+        {
+          "colIdx": 5,
+          "val": 0
+        }
+      ]
+    },
+    {
+      "rowIdx": 62,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "4.1.9 Taxas PIX"
+        },
+        {
+          "colIdx": 2,
+          "val": 0
+        },
+        {
+          "colIdx": 3,
+          "val": 0
+        },
+        {
+          "colIdx": 4,
+          "val": 0
+        },
+        {
+          "colIdx": 5,
+          "val": 0
+        }
+      ]
+    },
+    {
+      "rowIdx": 63,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "4.1.10 Taxas de boleto"
+        },
+        {
+          "colIdx": 2,
+          "val": 0
+        },
+        {
+          "colIdx": 3,
+          "val": 0
+        },
+        {
+          "colIdx": 4,
+          "val": 0
+        },
+        {
+          "colIdx": 5,
+          "val": 0
+        }
+      ]
+    },
+    {
+      "rowIdx": 64,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "4.1.11 DAE"
+        },
+        {
+          "colIdx": 2,
+          "val": 5619.780000000001
+        },
+        {
+          "colIdx": 3,
+          "val": 0
+        },
+        {
+          "colIdx": 4,
+          "val": 0
+        },
+        {
+          "colIdx": 5,
+          "val": -5619.780000000001
+        },
+        {
+          "colIdx": 6,
+          "val": -1
+        }
+      ]
+    },
+    {
+      "rowIdx": 65,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "4.1.99 Outros Custos Financeiros"
+        },
+        {
+          "colIdx": 2,
+          "val": 0
+        },
+        {
+          "colIdx": 3,
+          "val": 612.04
+        },
+        {
+          "colIdx": 4,
+          "val": 0.2244091312414294
+        },
+        {
+          "colIdx": 5,
+          "val": 612.04
+        }
+      ]
+    },
+    {
+      "rowIdx": 67,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "Custos com Produtos (-)"
+        },
+        {
+          "colIdx": 2,
+          "val": 631039.22
+        },
+        {
+          "colIdx": 3,
+          "val": 390570.57
+        },
+        {
+          "colIdx": 4,
+          "val": 0.6403577255980072
+        },
+        {
+          "colIdx": 5,
+          "val": -240468.64999999997
+        },
+        {
+          "colIdx": 6,
+          "val": -0.3810676775367464
+        }
+      ]
+    },
+    {
+      "rowIdx": 68,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "4.2.1 Carnes Bovinas"
+        },
+        {
+          "colIdx": 2,
+          "val": 0
+        },
+        {
+          "colIdx": 3,
+          "val": 0
+        },
+        {
+          "colIdx": 4,
+          "val": 0
+        },
+        {
+          "colIdx": 5,
+          "val": 0
+        }
+      ]
+    },
+    {
+      "rowIdx": 69,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "4.2.2 Carnes Avícolas"
+        },
+        {
+          "colIdx": 2,
+          "val": 0
+        },
+        {
+          "colIdx": 3,
+          "val": 0
+        },
+        {
+          "colIdx": 4,
+          "val": 0
+        },
+        {
+          "colIdx": 5,
+          "val": 0
+        }
+      ]
+    },
+    {
+      "rowIdx": 70,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "4.2.3 Peixe e frutos do mar"
+        },
+        {
+          "colIdx": 2,
+          "val": 0
+        },
+        {
+          "colIdx": 3,
+          "val": 0
+        },
+        {
+          "colIdx": 4,
+          "val": 0
+        },
+        {
+          "colIdx": 5,
+          "val": 0
+        }
+      ]
+    },
+    {
+      "rowIdx": 71,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "4.2.4 Cereais (arroz, farinha, açúcar, feijão, macarrão, cuzcuz)"
+        },
+        {
+          "colIdx": 2,
+          "val": 0
+        },
+        {
+          "colIdx": 3,
+          "val": 0
+        },
+        {
+          "colIdx": 4,
+          "val": 0
+        },
+        {
+          "colIdx": 5,
+          "val": 0
+        }
+      ]
+    },
+    {
+      "rowIdx": 72,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "4.2.5 Embutidos (linguiças, salsichas, salames, presuntos, bacon)"
+        },
+        {
+          "colIdx": 2,
+          "val": 0
+        },
+        {
+          "colIdx": 3,
+          "val": 0
+        },
+        {
+          "colIdx": 4,
+          "val": 0
+        },
+        {
+          "colIdx": 5,
+          "val": 0
+        }
+      ]
+    },
+    {
+      "rowIdx": 73,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "4.2.6 Queijos"
+        },
+        {
+          "colIdx": 2,
+          "val": 0
+        },
+        {
+          "colIdx": 3,
+          "val": 0
+        },
+        {
+          "colIdx": 4,
+          "val": 0
+        },
+        {
+          "colIdx": 5,
+          "val": 0
+        }
+      ]
+    },
+    {
+      "rowIdx": 74,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "4.2.7 Carnes Suinas"
+        },
+        {
+          "colIdx": 2,
+          "val": 0
+        },
+        {
+          "colIdx": 3,
+          "val": 0
+        },
+        {
+          "colIdx": 4,
+          "val": 0
+        },
+        {
+          "colIdx": 5,
+          "val": 0
+        }
+      ]
+    },
+    {
+      "rowIdx": 75,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "4.2.8 Temperos e condimentos  ( páprica, sal, pimenta, anis, lemonpepers, colorau, azeitona, corantes)"
+        },
+        {
+          "colIdx": 2,
+          "val": 0
+        },
+        {
+          "colIdx": 3,
+          "val": 0
+        },
+        {
+          "colIdx": 4,
+          "val": 0
+        },
+        {
+          "colIdx": 5,
+          "val": 0
+        }
+      ]
+    },
+    {
+      "rowIdx": 76,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "4.2.9 Insumos de panificação ( fermento, corantes da confeitaria)"
+        },
+        {
+          "colIdx": 2,
+          "val": 0
+        },
+        {
+          "colIdx": 3,
+          "val": 0
+        },
+        {
+          "colIdx": 4,
+          "val": 0
+        },
+        {
+          "colIdx": 5,
+          "val": 0
+        }
+      ]
+    },
+    {
+      "rowIdx": 77,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "4.2.10 Água mineral para venda"
+        },
+        {
+          "colIdx": 2,
+          "val": 0
+        },
+        {
+          "colIdx": 3,
+          "val": 0
+        },
+        {
+          "colIdx": 4,
+          "val": 0
+        },
+        {
+          "colIdx": 5,
+          "val": 0
+        }
+      ]
+    },
+    {
+      "rowIdx": 78,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "4.2.11 Bebidas em geral"
+        },
+        {
+          "colIdx": 2,
+          "val": 0
+        },
+        {
+          "colIdx": 3,
+          "val": 0
+        },
+        {
+          "colIdx": 4,
+          "val": 0
+        },
+        {
+          "colIdx": 5,
+          "val": 0
+        }
+      ]
+    },
+    {
+      "rowIdx": 79,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "4.2.12 Bebidas Alcoólicas"
+        },
+        {
+          "colIdx": 2,
+          "val": 0
+        },
+        {
+          "colIdx": 3,
+          "val": 0
+        },
+        {
+          "colIdx": 4,
+          "val": 0
+        },
+        {
+          "colIdx": 5,
+          "val": 0
+        }
+      ]
+    },
+    {
+      "rowIdx": 80,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "4.2.13 Lactícinios"
+        },
+        {
+          "colIdx": 2,
+          "val": 0
+        },
+        {
+          "colIdx": 3,
+          "val": 0
+        },
+        {
+          "colIdx": 4,
+          "val": 0
+        },
+        {
+          "colIdx": 5,
+          "val": 0
+        }
+      ]
+    },
+    {
+      "rowIdx": 81,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "4.2.14 Carnes Ovinas "
+        },
+        {
+          "colIdx": 2,
+          "val": 0
+        },
+        {
+          "colIdx": 3,
+          "val": 0
+        },
+        {
+          "colIdx": 4,
+          "val": 0
+        },
+        {
+          "colIdx": 5,
+          "val": 0
+        }
+      ]
+    },
+    {
+      "rowIdx": 82,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "4.2.15 Ovos"
+        },
+        {
+          "colIdx": 2,
+          "val": 0
+        },
+        {
+          "colIdx": 3,
+          "val": 0
+        },
+        {
+          "colIdx": 4,
+          "val": 0
+        },
+        {
+          "colIdx": 5,
+          "val": 0
+        }
+      ]
+    },
+    {
+      "rowIdx": 83,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "4.2.16 Caféteria (Café, Cappuccinos, Chocolates em pó)"
+        },
+        {
+          "colIdx": 2,
+          "val": 0
+        },
+        {
+          "colIdx": 3,
+          "val": 0
+        },
+        {
+          "colIdx": 4,
+          "val": 0
+        },
+        {
+          "colIdx": 5,
+          "val": 0
+        }
+      ]
+    },
+    {
+      "rowIdx": 84,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "4.2.17 Gordura e Óleo Vegetal"
+        },
+        {
+          "colIdx": 2,
+          "val": 0
+        },
+        {
+          "colIdx": 3,
+          "val": 0
+        },
+        {
+          "colIdx": 4,
+          "val": 0
+        },
+        {
+          "colIdx": 5,
+          "val": 0
+        }
+      ]
+    },
+    {
+      "rowIdx": 85,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "4.2.18 Margarina/Manteiga "
+        },
+        {
+          "colIdx": 2,
+          "val": 0
+        },
+        {
+          "colIdx": 3,
+          "val": 0
+        },
+        {
+          "colIdx": 4,
+          "val": 0
+        },
+        {
+          "colIdx": 5,
+          "val": 0
+        }
+      ]
+    },
+    {
+      "rowIdx": 86,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "4.2.19 Recheios (doce de leite, nutella, chocolate)"
+        },
+        {
+          "colIdx": 2,
+          "val": 0
+        },
+        {
+          "colIdx": 3,
+          "val": 0
+        },
+        {
+          "colIdx": 4,
+          "val": 0
+        },
+        {
+          "colIdx": 5,
+          "val": 0
+        }
+      ]
+    },
+    {
+      "rowIdx": 87,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "4.2.20 Batatas"
+        },
+        {
+          "colIdx": 2,
+          "val": 0
+        },
+        {
+          "colIdx": 3,
+          "val": 0
+        },
+        {
+          "colIdx": 4,
+          "val": 0
+        },
+        {
+          "colIdx": 5,
+          "val": 0
+        }
+      ]
+    },
+    {
+      "rowIdx": 88,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "4.2.21 Hortifruti"
+        },
+        {
+          "colIdx": 2,
+          "val": 0
+        },
+        {
+          "colIdx": 3,
+          "val": 0
+        },
+        {
+          "colIdx": 4,
+          "val": 0
+        },
+        {
+          "colIdx": 5,
+          "val": 0
+        }
+      ]
+    },
+    {
+      "rowIdx": 89,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "4.2.22 Mercearia"
+        },
+        {
+          "colIdx": 2,
+          "val": 0
+        },
+        {
+          "colIdx": 3,
+          "val": 0
+        },
+        {
+          "colIdx": 4,
+          "val": 0
+        },
+        {
+          "colIdx": 5,
+          "val": 0
+        }
+      ]
+    },
+    {
+      "rowIdx": 90,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "4.2.23 Molhos(maionese, ketchup, tomate, purê)"
+        },
+        {
+          "colIdx": 2,
+          "val": 0
+        },
+        {
+          "colIdx": 3,
+          "val": 0
+        },
+        {
+          "colIdx": 4,
+          "val": 0
+        },
+        {
+          "colIdx": 5,
+          "val": 0
+        }
+      ]
+    },
+    {
+      "rowIdx": 91,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "4.2.24 Produtos de Higiene"
+        },
+        {
+          "colIdx": 2,
+          "val": 0
+        },
+        {
+          "colIdx": 3,
+          "val": 0
+        },
+        {
+          "colIdx": 4,
+          "val": 0
+        },
+        {
+          "colIdx": 5,
+          "val": 0
+        }
+      ]
+    },
+    {
+      "rowIdx": 92,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "4.2.25 Sorvetes"
+        },
+        {
+          "colIdx": 2,
+          "val": 0
+        },
+        {
+          "colIdx": 3,
+          "val": 0
+        },
+        {
+          "colIdx": 4,
+          "val": 0
+        },
+        {
+          "colIdx": 5,
+          "val": 0
+        }
+      ]
+    },
+    {
+      "rowIdx": 93,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "4.2.26 Fast Food"
+        },
+        {
+          "colIdx": 2,
+          "val": 0
+        },
+        {
+          "colIdx": 3,
+          "val": 0
+        },
+        {
+          "colIdx": 4,
+          "val": 0
+        },
+        {
+          "colIdx": 5,
+          "val": 0
+        }
+      ]
+    },
+    {
+      "rowIdx": 94,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "4.2.27 Guloseimas"
+        },
+        {
+          "colIdx": 2,
+          "val": 0
+        },
+        {
+          "colIdx": 3,
+          "val": 0
+        },
+        {
+          "colIdx": 4,
+          "val": 0
+        },
+        {
+          "colIdx": 5,
+          "val": 0
+        }
+      ]
+    },
+    {
+      "rowIdx": 95,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "4.2.28 Carvão"
+        },
+        {
+          "colIdx": 2,
+          "val": 0
+        },
+        {
+          "colIdx": 3,
+          "val": 0
+        },
+        {
+          "colIdx": 4,
+          "val": 0
+        },
+        {
+          "colIdx": 5,
+          "val": 0
+        }
+      ]
+    },
+    {
+      "rowIdx": 96,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "4.2.2.9 Embalagens Papelão"
+        },
+        {
+          "colIdx": 2,
+          "val": 0
+        },
+        {
+          "colIdx": 3,
+          "val": 0
+        },
+        {
+          "colIdx": 4,
+          "val": 0
+        },
+        {
+          "colIdx": 5,
+          "val": 0
+        }
+      ]
+    },
+    {
+      "rowIdx": 97,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "4.2.3.0 Embalagens isopo/descaratveis"
+        },
+        {
+          "colIdx": 2,
+          "val": 0
+        },
+        {
+          "colIdx": 3,
+          "val": 0
+        },
+        {
+          "colIdx": 4,
+          "val": 0
+        },
+        {
+          "colIdx": 5,
+          "val": 0
+        }
+      ]
+    },
+    {
+      "rowIdx": 98,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "4.2.99 Outros custos com produtos"
+        },
+        {
+          "colIdx": 2,
+          "val": 631039.22
+        },
+        {
+          "colIdx": 3,
+          "val": 390570.57
+        },
+        {
+          "colIdx": 4,
+          "val": 0
+        },
+        {
+          "colIdx": 5,
+          "val": -240468.64999999997
+        }
+      ]
+    },
+    {
+      "rowIdx": 100,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "Custos com Embalagens (-)"
+        },
+        {
+          "colIdx": 2,
+          "val": 0
+        },
+        {
+          "colIdx": 3,
+          "val": 0
+        },
+        {
+          "colIdx": 4,
+          "val": 0
+        },
+        {
+          "colIdx": 5,
+          "val": 0
+        }
+      ]
+    },
+    {
+      "rowIdx": 101,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "4.3.3 Embalagens Uso Interno"
+        },
+        {
+          "colIdx": 2,
+          "val": 0
+        },
+        {
+          "colIdx": 3,
+          "val": 0
+        },
+        {
+          "colIdx": 4,
+          "val": 0
+        },
+        {
+          "colIdx": 5,
+          "val": 0
+        }
+      ]
+    },
+    {
+      "rowIdx": 102,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "4.3.4 Sacolas dos Caixas"
+        },
+        {
+          "colIdx": 2,
+          "val": 0
+        },
+        {
+          "colIdx": 3,
+          "val": 0
+        },
+        {
+          "colIdx": 4,
+          "val": 0
+        },
+        {
+          "colIdx": 5,
+          "val": 0
+        }
+      ]
+    },
+    {
+      "rowIdx": 103,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "4.3.99 Outros custos com Embalagem"
+        },
+        {
+          "colIdx": 2,
+          "val": 0
+        },
+        {
+          "colIdx": 3,
+          "val": 0
+        },
+        {
+          "colIdx": 4,
+          "val": 0
+        },
+        {
+          "colIdx": 5,
+          "val": 0
+        }
+      ]
+    },
+    {
+      "rowIdx": 105,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "Custos com Comissão (-)"
+        },
+        {
+          "colIdx": 2,
+          "val": 3500
+        },
+        {
+          "colIdx": 3,
+          "val": 32388
+        },
+        {
+          "colIdx": 4,
+          "val": 0.05310155861632958
+        },
+        {
+          "colIdx": 5,
+          "val": 28888
+        }
+      ]
+    },
+    {
+      "rowIdx": 106,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "4.4.1 Comissões Vendedores"
+        },
+        {
+          "colIdx": 2,
+          "val": 0
+        },
+        {
+          "colIdx": 3,
+          "val": 0
+        },
+        {
+          "colIdx": 4,
+          "val": 0
+        },
+        {
+          "colIdx": 5,
+          "val": 0
+        }
+      ]
+    },
+    {
+      "rowIdx": 107,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "4.4.2 Comissões Entregadores"
+        },
+        {
+          "colIdx": 2,
+          "val": 3500
+        },
+        {
+          "colIdx": 3,
+          "val": 32388
+        },
+        {
+          "colIdx": 4,
+          "val": 0.05310155861632958
+        },
+        {
+          "colIdx": 5,
+          "val": 28888
+        }
+      ]
+    },
+    {
+      "rowIdx": 108,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "4.4.99 Outros custos com comissões"
+        },
+        {
+          "colIdx": 2,
+          "val": 0
+        },
+        {
+          "colIdx": 3,
+          "val": 0
+        },
+        {
+          "colIdx": 4,
+          "val": 0
+        },
+        {
+          "colIdx": 5,
+          "val": 0
+        }
+      ]
+    },
+    {
+      "rowIdx": 110,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "Margem de Contribuição (=)"
+        },
+        {
+          "colIdx": 2,
+          "val": 151073.7400000001
+        },
+        {
+          "colIdx": 3,
+          "val": 184239.69000000018
+        },
+        {
+          "colIdx": 4,
+          "val": 0.3020691212174077
+        },
+        {
+          "colIdx": 5,
+          "val": 33165.95000000007
+        },
+        {
+          "colIdx": 6,
+          "val": 0.21953484437467452
+        }
+      ]
+    },
+    {
+      "rowIdx": 111,
+      "cells": [
+        {
+          "colIdx": 2,
+          "val": 0.19075157682446056
+        },
+        {
+          "colIdx": 3,
+          "val": 0.3020691212174077
+        }
+      ]
+    },
+    {
+      "rowIdx": 112,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "Custos Fixos (-)"
+        },
+        {
+          "colIdx": 2,
+          "val": 99978.54
+        },
+        {
+          "colIdx": 3,
+          "val": 66643.59
+        },
+        {
+          "colIdx": 4,
+          "val": 0.10926511364664801
+        },
+        {
+          "colIdx": 5,
+          "val": -33334.95
+        },
+        {
+          "colIdx": 6,
+          "val": -0.33342105215779305
+        }
+      ]
+    },
+    {
+      "rowIdx": 113,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "Administrativas (-)"
+        },
+        {
+          "colIdx": 2,
+          "val": 29542.03
+        },
+        {
+          "colIdx": 3,
+          "val": 16195.600000000002
+        },
+        {
+          "colIdx": 4,
+          "val": 0.026553402578937492
+        },
+        {
+          "colIdx": 5,
+          "val": -13346.429999999997
+        },
+        {
+          "colIdx": 6,
+          "val": -0.45177768758612724
+        }
+      ]
+    },
+    {
+      "rowIdx": 114,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "5.2.1 Telefone fixo e Internet"
+        },
+        {
+          "colIdx": 2,
+          "val": 0
+        },
+        {
+          "colIdx": 3,
+          "val": 95.99
+        },
+        {
+          "colIdx": 4,
+          "val": 1.9049414566382217
+        },
+        {
+          "colIdx": 5,
+          "val": 95.99
+        }
+      ]
+    },
+    {
+      "rowIdx": 115,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "5.2.2 Celular"
+        },
+        {
+          "colIdx": 2,
+          "val": 90.99
+        },
+        {
+          "colIdx": 3,
+          "val": 0
+        },
+        {
+          "colIdx": 4,
+          "val": 0
+        },
+        {
+          "colIdx": 5,
+          "val": -90.99
+        },
+        {
+          "colIdx": 6,
+          "val": -1
+        }
+      ]
+    },
+    {
+      "rowIdx": 116,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "5.2.3 Energia Elétrica"
+        },
+        {
+          "colIdx": 2,
+          "val": 3348.96
+        },
+        {
+          "colIdx": 3,
+          "val": 7980.320000000001
+        },
+        {
+          "colIdx": 4,
+          "val": 158.3711053780512
+        },
+        {
+          "colIdx": 5,
+          "val": 4631.360000000001
+        },
+        {
+          "colIdx": 6,
+          "val": 1.3829248483111178
+        }
+      ]
+    },
+    {
+      "rowIdx": 117,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "5.2.4 Aluguel e Condomínio"
+        },
+        {
+          "colIdx": 2,
+          "val": 10708
+        },
+        {
+          "colIdx": 3,
+          "val": 4208
+        },
+        {
+          "colIdx": 4,
+          "val": 83.50863266521135
+        },
+        {
+          "colIdx": 5,
+          "val": -6500
+        },
+        {
+          "colIdx": 6,
+          "val": -0.6070227867015316
+        }
+      ]
+    },
+    {
+      "rowIdx": 118,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "5.2.5 Água"
+        },
+        {
+          "colIdx": 2,
+          "val": 0
+        },
+        {
+          "colIdx": 3,
+          "val": 262.52
+        },
+        {
+          "colIdx": 4,
+          "val": 5.209763842032149
+        },
+        {
+          "colIdx": 5,
+          "val": 262.52
+        }
+      ]
+    },
+    {
+      "rowIdx": 119,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "5.2.6 IPTU e Taxas Públicas"
+        },
+        {
+          "colIdx": 2,
+          "val": 522.83
+        },
+        {
+          "colIdx": 3,
+          "val": 50.39
+        },
+        {
+          "colIdx": 4,
+          "val": 1
+        },
+        {
+          "colIdx": 5,
+          "val": -472.44000000000005
+        },
+        {
+          "colIdx": 6,
+          "val": -0.9036206797620642
+        }
+      ]
+    },
+    {
+      "rowIdx": 120,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "5.2.7 Transportes"
+        },
+        {
+          "colIdx": 2,
+          "val": 0
+        },
+        {
+          "colIdx": 3,
+          "val": 0
+        },
+        {
+          "colIdx": 4,
+          "val": 0
+        },
+        {
+          "colIdx": 5,
+          "val": 0
+        }
+      ]
+    },
+    {
+      "rowIdx": 121,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "5.2.8 Almoço / Supermercado / Lanches/Água Potável"
+        },
+        {
+          "colIdx": 2,
+          "val": 0
+        },
+        {
+          "colIdx": 3,
+          "val": 0
+        },
+        {
+          "colIdx": 4,
+          "val": 0
+        },
+        {
+          "colIdx": 5,
+          "val": 0
+        }
+      ]
+    },
+    {
+      "rowIdx": 122,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "5.2.9 Correios"
+        },
+        {
+          "colIdx": 2,
+          "val": 0
+        },
+        {
+          "colIdx": 3,
+          "val": 0
+        },
+        {
+          "colIdx": 4,
+          "val": 0
+        },
+        {
+          "colIdx": 5,
+          "val": 0
+        }
+      ]
+    },
+    {
+      "rowIdx": 123,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "5.2.10 Documentações e Licenças"
+        },
+        {
+          "colIdx": 2,
+          "val": 1849.6999999999998
+        },
+        {
+          "colIdx": 3,
+          "val": 0
+        },
+        {
+          "colIdx": 4,
+          "val": 0
+        },
+        {
+          "colIdx": 5,
+          "val": -1849.6999999999998
+        },
+        {
+          "colIdx": 6,
+          "val": -1
+        }
+      ]
+    },
+    {
+      "rowIdx": 124,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "5.2.11 Advogado da empresa"
+        },
+        {
+          "colIdx": 2,
+          "val": 5673.5
+        },
+        {
+          "colIdx": 3,
+          "val": 0
+        },
+        {
+          "colIdx": 4,
+          "val": 0
+        },
+        {
+          "colIdx": 5,
+          "val": -5673.5
+        },
+        {
+          "colIdx": 6,
+          "val": -1
+        }
+      ]
+    },
+    {
+      "rowIdx": 125,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "5.2.12 Contador"
+        },
+        {
+          "colIdx": 2,
+          "val": 3000
+        },
+        {
+          "colIdx": 3,
+          "val": 0
+        },
+        {
+          "colIdx": 4,
+          "val": 0
+        },
+        {
+          "colIdx": 5,
+          "val": -3000
+        },
+        {
+          "colIdx": 6,
+          "val": -1
+        }
+      ]
+    },
+    {
+      "rowIdx": 126,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "5.2.13 Mensalidade de Softwares"
+        },
+        {
+          "colIdx": 2,
+          "val": 0
+        },
+        {
+          "colIdx": 3,
+          "val": 0
+        },
+        {
+          "colIdx": 4,
+          "val": 0
+        },
+        {
+          "colIdx": 5,
+          "val": 0
+        }
+      ]
+    },
+    {
+      "rowIdx": 127,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "5.2.14 Segurança"
+        },
+        {
+          "colIdx": 2,
+          "val": 0
+        },
+        {
+          "colIdx": 3,
+          "val": 0
+        },
+        {
+          "colIdx": 4,
+          "val": 0
+        },
+        {
+          "colIdx": 5,
+          "val": 0
+        }
+      ]
+    },
+    {
+      "rowIdx": 128,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "5.2.15 Gerenciamento de Midias"
+        },
+        {
+          "colIdx": 2,
+          "val": 0
+        },
+        {
+          "colIdx": 3,
+          "val": 0
+        },
+        {
+          "colIdx": 4,
+          "val": 0
+        },
+        {
+          "colIdx": 5,
+          "val": 0
+        }
+      ]
+    },
+    {
+      "rowIdx": 129,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "5.2.16 Assessoria Jurídica"
+        },
+        {
+          "colIdx": 2,
+          "val": 0
+        },
+        {
+          "colIdx": 3,
+          "val": 0
+        },
+        {
+          "colIdx": 4,
+          "val": 0
+        },
+        {
+          "colIdx": 5,
+          "val": 0
+        }
+      ]
+    },
+    {
+      "rowIdx": 130,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "5.2.17 Taxa de Lixo"
+        },
+        {
+          "colIdx": 2,
+          "val": 0
+        },
+        {
+          "colIdx": 3,
+          "val": 0
+        },
+        {
+          "colIdx": 4,
+          "val": 0
+        },
+        {
+          "colIdx": 5,
+          "val": 0
+        }
+      ]
+    },
+    {
+      "rowIdx": 131,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "5.2.18 Taxa de Matadouro Municipal"
+        },
+        {
+          "colIdx": 2,
+          "val": 0
+        },
+        {
+          "colIdx": 3,
+          "val": 3598.38
+        },
+        {
+          "colIdx": 4,
+          "val": 71.41059734074221
+        },
+        {
+          "colIdx": 5,
+          "val": 3598.38
+        }
+      ]
+    },
+    {
+      "rowIdx": 132,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "5.2.99 Outras despesas administrativas"
+        },
+        {
+          "colIdx": 2,
+          "val": 4348.05
+        },
+        {
+          "colIdx": 3,
+          "val": 0
+        },
+        {
+          "colIdx": 4,
+          "val": 0
+        },
+        {
+          "colIdx": 5,
+          "val": -4348.05
+        },
+        {
+          "colIdx": 6,
+          "val": -1
+        }
+      ]
+    },
+    {
+      "rowIdx": 134,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "Pessoal (-)"
+        },
+        {
+          "colIdx": 2,
+          "val": 62806.979999999996
+        },
+        {
+          "colIdx": 3,
+          "val": 44564.42999999999
+        },
+        {
+          "colIdx": 4,
+          "val": 0.07306535420057787
+        },
+        {
+          "colIdx": 5,
+          "val": -18242.550000000003
+        },
+        {
+          "colIdx": 6,
+          "val": -0.29045418200333795
+        }
+      ]
+    },
+    {
+      "rowIdx": 135,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "5.3.1 Salário de Funcionários"
+        },
+        {
+          "colIdx": 2,
+          "val": 29277.729999999996
+        },
+        {
+          "colIdx": 3,
+          "val": 19988.98
+        },
+        {
+          "colIdx": 4,
+          "val": 0
+        },
+        {
+          "colIdx": 5,
+          "val": -9288.749999999996
+        },
+        {
+          "colIdx": 6,
+          "val": -0.317263326084365
+        }
+      ]
+    },
+    {
+      "rowIdx": 136,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "5.3.2 Bolsa de Estágio"
+        },
+        {
+          "colIdx": 2,
+          "val": 0
+        },
+        {
+          "colIdx": 3,
+          "val": 0
+        },
+        {
+          "colIdx": 4,
+          "val": 0
+        },
+        {
+          "colIdx": 5,
+          "val": 0
+        }
+      ]
+    },
+    {
+      "rowIdx": 137,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "5.3.3 Ajuda de Custo"
+        },
+        {
+          "colIdx": 2,
+          "val": 0
+        },
+        {
+          "colIdx": 3,
+          "val": 0
+        },
+        {
+          "colIdx": 4,
+          "val": 0
+        },
+        {
+          "colIdx": 5,
+          "val": 0
+        }
+      ]
+    },
+    {
+      "rowIdx": 138,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "5.3.4 Rescisão"
+        },
+        {
+          "colIdx": 2,
+          "val": 0
+        },
+        {
+          "colIdx": 3,
+          "val": 0
+        },
+        {
+          "colIdx": 4,
+          "val": 0
+        },
+        {
+          "colIdx": 5,
+          "val": 0
+        }
+      ]
+    },
+    {
+      "rowIdx": 139,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "5.3.5 INSS/FGTS"
+        },
+        {
+          "colIdx": 2,
+          "val": 606.48
+        },
+        {
+          "colIdx": 3,
+          "val": 13913.86
+        },
+        {
+          "colIdx": 4,
+          "val": 0
+        },
+        {
+          "colIdx": 5,
+          "val": 13307.380000000001
+        },
+        {
+          "colIdx": 6,
+          "val": 21.941993140746604
+        }
+      ]
+    },
+    {
+      "rowIdx": 140,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "5.3.6 13º e Férias"
+        },
+        {
+          "colIdx": 2,
+          "val": 1894.29
+        },
+        {
+          "colIdx": 3,
+          "val": 0
+        },
+        {
+          "colIdx": 4,
+          "val": 0
+        },
+        {
+          "colIdx": 5,
+          "val": -1894.29
+        },
+        {
+          "colIdx": 6,
+          "val": -1
+        }
+      ]
+    },
+    {
+      "rowIdx": 141,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "5.3.7 Exames Ocupacionais"
+        },
+        {
+          "colIdx": 2,
+          "val": 0
+        },
+        {
+          "colIdx": 3,
+          "val": 0
+        },
+        {
+          "colIdx": 4,
+          "val": 0
+        },
+        {
+          "colIdx": 5,
+          "val": 0
+        }
+      ]
+    },
+    {
+      "rowIdx": 142,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "5.3.8 Pró-labores"
+        },
+        {
+          "colIdx": 2,
+          "val": 20885
+        },
+        {
+          "colIdx": 3,
+          "val": 6043.95
+        },
+        {
+          "colIdx": 4,
+          "val": 0
+        },
+        {
+          "colIdx": 5,
+          "val": -14841.05
+        },
+        {
+          "colIdx": 6,
+          "val": -0.7106080919320086
+        }
+      ]
+    },
+    {
+      "rowIdx": 143,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "5.3.9 Confraternizações / Festas da Empresa"
+        },
+        {
+          "colIdx": 2,
+          "val": 67.99
+        },
+        {
+          "colIdx": 3,
+          "val": 0
+        },
+        {
+          "colIdx": 4,
+          "val": 0
+        },
+        {
+          "colIdx": 5,
+          "val": -67.99
+        },
+        {
+          "colIdx": 6,
+          "val": -1
+        }
+      ]
+    },
+    {
+      "rowIdx": 144,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "5.3.10 Diarista"
+        },
+        {
+          "colIdx": 2,
+          "val": 0
+        },
+        {
+          "colIdx": 3,
+          "val": 0
+        },
+        {
+          "colIdx": 4,
+          "val": 0
+        },
+        {
+          "colIdx": 5,
+          "val": 0
+        }
+      ]
+    },
+    {
+      "rowIdx": 145,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "5.3.12 Adiantamento salário de funcionários"
+        },
+        {
+          "colIdx": 2,
+          "val": 0
+        },
+        {
+          "colIdx": 3,
+          "val": 665.14
+        },
+        {
+          "colIdx": 4,
+          "val": 0
+        },
+        {
+          "colIdx": 5,
+          "val": 665.14
+        }
+      ]
+    },
+    {
+      "rowIdx": 146,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "5.3.99 Outras despesas com pessoal"
+        },
+        {
+          "colIdx": 2,
+          "val": 6809.49
+        },
+        {
+          "colIdx": 3,
+          "val": 0
+        },
+        {
+          "colIdx": 4,
+          "val": 0
+        },
+        {
+          "colIdx": 5,
+          "val": -6809.49
+        },
+        {
+          "colIdx": 6,
+          "val": -1
+        }
+      ]
+    },
+    {
+      "rowIdx": 147,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "5.3.13 Horas extras"
+        },
+        {
+          "colIdx": 2,
+          "val": 3266
+        },
+        {
+          "colIdx": 3,
+          "val": 3952.5
+        },
+        {
+          "colIdx": 4,
+          "val": 0
+        },
+        {
+          "colIdx": 5,
+          "val": 686.5
+        },
+        {
+          "colIdx": 6,
+          "val": 0.21019595835884886
+        }
+      ]
+    },
+    {
+      "rowIdx": 148,
+      "cells": [
+        {
+          "colIdx": 2,
+          "val": 0.07930253444829227
+        }
+      ]
+    },
+    {
+      "rowIdx": 149,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "Despesas com Materiais e Equipamentos (-)"
+        },
+        {
+          "colIdx": 2,
+          "val": 6070
+        },
+        {
+          "colIdx": 3,
+          "val": 2770
+        },
+        {
+          "colIdx": 4,
+          "val": 0.004541537525232584
+        },
+        {
+          "colIdx": 5,
+          "val": -3300
+        },
+        {
+          "colIdx": 6,
+          "val": -0.5436573311367381
+        }
+      ]
+    },
+    {
+      "rowIdx": 150,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "5.4.1 Manutenção Máquinas e Equipamentos"
+        },
+        {
+          "colIdx": 2,
+          "val": 900
+        },
+        {
+          "colIdx": 3,
+          "val": 450
+        },
+        {
+          "colIdx": 4,
+          "val": 0.1624548736462094
+        },
+        {
+          "colIdx": 5,
+          "val": -450
+        },
+        {
+          "colIdx": 6,
+          "val": -0.5
+        }
+      ]
+    },
+    {
+      "rowIdx": 151,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "5.4.2 Compra de Maquina e equipamentos"
+        },
+        {
+          "colIdx": 2,
+          "val": 200
+        },
+        {
+          "colIdx": 3,
+          "val": 0
+        },
+        {
+          "colIdx": 4,
+          "val": 0
+        },
+        {
+          "colIdx": 5,
+          "val": -200
+        },
+        {
+          "colIdx": 6,
+          "val": -1
+        }
+      ]
+    },
+    {
+      "rowIdx": 152,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "5.4.3 Serviços de Técnico em Informática"
+        },
+        {
+          "colIdx": 2,
+          "val": 0
+        },
+        {
+          "colIdx": 3,
+          "val": 0
+        },
+        {
+          "colIdx": 4,
+          "val": 0
+        },
+        {
+          "colIdx": 5,
+          "val": 0
+        }
+      ]
+    },
+    {
+      "rowIdx": 153,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "5.4.4 Materiais de Expediente/Escritório"
+        },
+        {
+          "colIdx": 2,
+          "val": 0
+        },
+        {
+          "colIdx": 3,
+          "val": 0
+        },
+        {
+          "colIdx": 4,
+          "val": 0
+        },
+        {
+          "colIdx": 5,
+          "val": 0
+        }
+      ]
+    },
+    {
+      "rowIdx": 154,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "5.4.5 Materiais de Limpeza"
+        },
+        {
+          "colIdx": 2,
+          "val": 0
+        },
+        {
+          "colIdx": 3,
+          "val": 0
+        }
+      ]
+    },
+    {
+      "rowIdx": 155,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "5.4.99 Manutenção Predial"
+        },
+        {
+          "colIdx": 2,
+          "val": 4970
+        },
+        {
+          "colIdx": 3,
+          "val": 2320
+        },
+        {
+          "colIdx": 4,
+          "val": 0.8375451263537906
+        },
+        {
+          "colIdx": 5,
+          "val": -2650
+        },
+        {
+          "colIdx": 6,
+          "val": -0.5331991951710262
+        }
+      ]
+    },
+    {
+      "rowIdx": 157,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "Despesas com Veículos (-)"
+        },
+        {
+          "colIdx": 2,
+          "val": 260
+        },
+        {
+          "colIdx": 3,
+          "val": 2230.56
+        },
+        {
+          "colIdx": 4,
+          "val": 0.0036571017842176147
+        },
+        {
+          "colIdx": 5,
+          "val": 1970.56
+        },
+        {
+          "colIdx": 6,
+          "val": 7.579076923076922
+        }
+      ]
+    },
+    {
+      "rowIdx": 158,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "5.5.1 Gasolina / Combustível"
+        },
+        {
+          "colIdx": 2,
+          "val": 250
+        },
+        {
+          "colIdx": 3,
+          "val": 630.56
+        },
+        {
+          "colIdx": 4,
+          "val": 0.2826913420844989
+        },
+        {
+          "colIdx": 5,
+          "val": 380.55999999999995
+        },
+        {
+          "colIdx": 6,
+          "val": 1.5222399999999996
+        }
+      ]
+    },
+    {
+      "rowIdx": 159,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "5.5.2 Manutenção de Veículos"
+        },
+        {
+          "colIdx": 2,
+          "val": 0
+        },
+        {
+          "colIdx": 3,
+          "val": 1600
+        },
+        {
+          "colIdx": 4,
+          "val": 0.717308657915501
+        },
+        {
+          "colIdx": 5,
+          "val": 1600
+        }
+      ]
+    },
+    {
+      "rowIdx": 160,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "5.5.99 Outras despesas com Veículos"
+        },
+        {
+          "colIdx": 2,
+          "val": 10
+        },
+        {
+          "colIdx": 3,
+          "val": 0
+        },
+        {
+          "colIdx": 4,
+          "val": 0
+        },
+        {
+          "colIdx": 5,
+          "val": -10
+        },
+        {
+          "colIdx": 6,
+          "val": -1
+        }
+      ]
+    },
+    {
+      "rowIdx": 162,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "Despesas Financeiras (-)"
+        },
+        {
+          "colIdx": 2,
+          "val": 1299.5300000000004
+        },
+        {
+          "colIdx": 3,
+          "val": 882.9999999999999
+        },
+        {
+          "colIdx": 4,
+          "val": 0.0014477175576824446
+        },
+        {
+          "colIdx": 5,
+          "val": -416.53000000000054
+        },
+        {
+          "colIdx": 6,
+          "val": -0.32052357390749
+        }
+      ]
+    },
+    {
+      "rowIdx": 163,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "5.1.1 Tarifas Bancárias"
+        },
+        {
+          "colIdx": 2,
+          "val": 1299.5300000000004
+        },
+        {
+          "colIdx": 3,
+          "val": 882.9999999999999
+        },
+        {
+          "colIdx": 4,
+          "val": 0
+        },
+        {
+          "colIdx": 5,
+          "val": -416.53000000000054
+        },
+        {
+          "colIdx": 6,
+          "val": -0.32052357390749
+        }
+      ]
+    },
+    {
+      "rowIdx": 164,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "5.1.2 Aluguel de Máquinas de Cartão"
+        },
+        {
+          "colIdx": 2,
+          "val": 0
+        },
+        {
+          "colIdx": 3,
+          "val": 0
+        },
+        {
+          "colIdx": 4,
+          "val": 0
+        },
+        {
+          "colIdx": 5,
+          "val": 0
+        }
+      ]
+    },
+    {
+      "rowIdx": 165,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "5.1.3 Tarifas DOC/TED"
+        },
+        {
+          "colIdx": 2,
+          "val": 0
+        },
+        {
+          "colIdx": 3,
+          "val": 0
+        },
+        {
+          "colIdx": 4,
+          "val": 0
+        },
+        {
+          "colIdx": 5,
+          "val": 0
+        }
+      ]
+    },
+    {
+      "rowIdx": 166,
+      "cells": [
+        {
+          "colIdx": 1,
+          "val": "5.1.4 Tarifas Cartão Refeição/Alimentação"
+        },
+        {
+          "colIdx": 2,
+          "val": 0
+        },
+        {
+          "colIdx": 3,
+          "val": 0
+        },
+        {
+          "colIdx": 4,
+          "val": 0
+        },
+        {
+          "colIdx": 5,
+          "val": 0
+        }
+      ]
+    }
+  ]
+}
