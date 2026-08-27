@@ -1,19 +1,22 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { AlertCircle, CheckCircle2, Info, Loader2, TrendingUp, TrendingDown, Percent, Wallet } from "lucide-react";
+import {
+  AlertCircle,
+  CheckCircle2,
+  Info,
+  Loader2,
+  Coins,
+  ArrowUpRight,
+  PiggyBank,
+  UserRound,
+} from "lucide-react";
 import { KpiCard } from "@/components/dashboard/kpi-card";
-import { RevenueExpenseChart } from "@/components/dashboard/revenue-expense-chart";
-import { ExpenseComposition } from "@/components/dashboard/expense-composition";
+import { PerformanceChart } from "@/components/dashboard/performance-chart";
+import { TopExpensesChart } from "@/components/dashboard/top-expenses-chart";
 import { DreTable } from "@/components/dashboard/dre-table";
 import { ImportPlanilha } from "@/components/dashboard/import-planilha";
 import { PeriodFilter } from "@/components/dashboard/period-filter";
 import { useFinance } from "@/lib/finance/finance-store";
-import {
-  delta,
-  margemContribuicao,
-  saldoFinal,
-  totalDespesas,
-  totalReceitas,
-} from "@/lib/finance/selectors";
+import { delta, lucroBruto, lucroClinica, proLabore, totalReceitas } from "@/lib/finance/selectors";
 import { formatBRL, formatDateTime } from "@/lib/finance/format";
 
 export const Route = createFileRoute("/")({
@@ -21,9 +24,15 @@ export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "Dra. Térsia | Financeiro" },
-      { name: "description", content: "Dashboard financeiro executivo com KPIs, DRE e composição de despesas." },
+      {
+        name: "description",
+        content: "Dashboard financeiro executivo com KPIs, DRE e composição de despesas.",
+      },
       { property: "og:title", content: "Dra. Térsia | Financeiro" },
-      { property: "og:description", content: "KPIs, receitas vs despesas, DRE e composição das despesas." },
+      {
+        property: "og:description",
+        content: "KPIs, receitas vs despesas, DRE e composição das despesas.",
+      },
     ],
   }),
 });
@@ -31,10 +40,10 @@ export const Route = createFileRoute("/")({
 function FinanceiroPage() {
   const { dataset, periodKeys, previousKeys, status, errorMessage, successMessage } = useFinance();
 
-  const receitas = dataset ? totalReceitas(dataset, periodKeys) : 0;
-  const despesas = dataset ? totalDespesas(dataset, periodKeys) : 0;
-  const margem = dataset ? margemContribuicao(dataset, periodKeys) : 0;
-  const saldo = dataset ? saldoFinal(dataset, periodKeys) : 0;
+  const faturamento = dataset ? totalReceitas(dataset, periodKeys) : 0;
+  const lucroBrutoVal = dataset ? lucroBruto(dataset, periodKeys) : 0;
+  const lucroClinicaVal = dataset ? lucroClinica(dataset, periodKeys) : 0;
+  const proLaboreVal = dataset ? proLabore(dataset, periodKeys) : 0;
 
   const hasPrev = !!dataset && previousKeys.length > 0;
   const d = (current: number, previous: number) => (hasPrev ? delta(current, previous) : null);
@@ -43,7 +52,16 @@ function FinanceiroPage() {
     <main className="flex-1 px-4 py-6 md:px-8 md:py-8">
       {/* Header */}
       <header className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-4 mb-6 lg:flex lg:flex-wrap lg:justify-between">
-        <h1 className="truncate text-2xl md:text-3xl font-black tracking-tight">Dra. Térsia | Financeiro</h1>
+        <div className="flex min-w-0 items-center gap-3">
+          <img
+            src="/logo-dra-tersia.jpeg"
+            alt="Logo Dra. Térsia"
+            className="h-11 w-auto rounded-lg object-contain ring-1 ring-border shadow-sm"
+          />
+          <h1 className="truncate text-2xl md:text-3xl font-black tracking-tight">
+            Dra. Térsia | Financeiro
+          </h1>
+        </div>
         <div className="col-span-2 lg:col-auto">
           <PeriodFilter />
         </div>
@@ -76,7 +94,8 @@ function FinanceiroPage() {
       )}
       {dataset && (
         <p className="mb-4 text-xs text-muted-foreground">
-          Última atualização: <span className="font-medium text-foreground">{dataset.fileName}</span> ·{" "}
+          Última atualização:{" "}
+          <span className="font-medium text-foreground">{dataset.fileName}</span> ·{" "}
           {formatDateTime(dataset.importedAt)}
         </p>
       )}
@@ -87,46 +106,48 @@ function FinanceiroPage() {
           {/* KPIs */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <KpiCard
-              label="Total de Receitas"
-              rawValue={receitas}
+              label="Faturamento Bruto"
+              rawValue={faturamento}
               tone="success"
-              icon={TrendingUp}
+              icon={Coins}
               iconBg="bg-emerald-500/15 text-emerald-600 dark:text-emerald-400"
-              delta={d(receitas, dataset ? totalReceitas(dataset, previousKeys) : 0)}
+              delta={d(faturamento, dataset ? totalReceitas(dataset, previousKeys) : 0)}
             />
             <KpiCard
-              label="Total de Despesas"
-              rawValue={despesas}
-              tone="danger"
-              icon={TrendingDown}
-              iconBg="bg-rose-500/15 text-rose-600 dark:text-rose-400"
-              delta={d(despesas, dataset ? totalDespesas(dataset, previousKeys) : 0)}
-            />
-            <KpiCard
-              label="Margem de Contribuição"
-              rawValue={margem}
+              label="Lucro Bruto"
+              rawValue={lucroBrutoVal}
               tone="auto"
-              icon={Percent}
+              icon={ArrowUpRight}
               iconBg="bg-blue-500/15 text-blue-600 dark:text-blue-400"
-              delta={d(margem, dataset ? margemContribuicao(dataset, previousKeys) : 0)}
+              delta={d(lucroBrutoVal, dataset ? lucroBruto(dataset, previousKeys) : 0)}
             />
             <KpiCard
-              label="Saldo Final"
-              rawValue={saldo}
+              label="Lucro da Clínica"
+              rawValue={lucroClinicaVal}
               tone="auto"
-              icon={Wallet}
-              iconBg={saldo >= 0 ? "bg-emerald-500/15 text-emerald-600 dark:text-emerald-400" : "bg-rose-500/15 text-rose-600 dark:text-rose-400"}
-              delta={d(saldo, dataset ? saldoFinal(dataset, previousKeys) : 0)}
+              icon={PiggyBank}
+              iconBg="bg-violet-500/15 text-violet-600 dark:text-violet-400"
+              delta={d(lucroClinicaVal, dataset ? lucroClinica(dataset, previousKeys) : 0)}
+            />
+            <KpiCard
+              label="Pró-labore Dra. Térsia"
+              rawValue={proLaboreVal}
+              tone="auto"
+              icon={UserRound}
+              iconBg="bg-amber-500/15 text-amber-600 dark:text-amber-400"
+              delta={d(proLaboreVal, dataset ? proLabore(dataset, previousKeys) : 0)}
             />
           </div>
 
-          <RevenueExpenseChart />
+          <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
+            <PerformanceChart />
+            <TopExpensesChart />
+          </div>
           <DreTable />
         </div>
 
         {/* Side column */}
         <aside className="space-y-6 min-w-0">
-          <ExpenseComposition />
           <ImportPlanilha />
         </aside>
       </div>

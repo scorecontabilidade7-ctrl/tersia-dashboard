@@ -393,8 +393,9 @@ export async function parseDfcWorkbook(file: File): Promise<FinanceDataset> {
       const codeMatch = rawLabel.match(/^(\d+(?:\.\d+)+)/);
       const code = codeMatch ? codeMatch[1] : "";
 
-      // Clean display label for presentation (removing leading numeric codes)
-      const cleanLabel = rawLabel.replace(/^[\d\.\-\s]+/, "").trim() || rawLabel;
+      // Clean display label for presentation (removing the numeric code prefix only,
+      // so labels like "13º e Férias" aren't stripped of their leading digits)
+      const cleanLabel = (code ? rawLabel.slice(code.length) : rawLabel).trim() || rawLabel;
 
       let targetCategory: string | null = null;
 

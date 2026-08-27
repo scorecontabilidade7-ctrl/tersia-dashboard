@@ -1,66 +1,123 @@
-import { useState } from "react";
-import { ArrowUp, ArrowDown, Plus, Minus, Equal, CornerDownRight, ChevronRight, ChevronDown } from "lucide-react";
+import { Fragment, useState } from "react";
+import { ArrowUp, ArrowDown, ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useFinance } from "@/lib/finance/finance-store";
-import { buildDre, delta, type DreLine } from "@/lib/finance/selectors";
+import { buildSimpleDre, delta, type DreBreakItem } from "@/lib/finance/selectors";
 import { formatBRL } from "@/lib/finance/format";
 
-function KindIcon({ kind }: { kind: DreLine["kind"] }) {
-  const cls = "h-4 w-4 text-white";
-  if (kind === "income")
-    return (
-      <span className="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-success">
-        <Plus className={cls} />
-      </span>
-    );
-  if (kind === "expense")
-    return (
-      <span className="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-primary">
-        <Minus className={cls} />
-      </span>
-    );
+const HIGHLIGHT_IDS = new Set(["faturamento", "lucro-bruto", "lucro-clinica", "lucro-liquido"]);
+
+function BreakRows({
+  items,
+  path,
+  isExpense,
+  open,
+  toggle,
+  depth,
+}: {
+  items: DreBreakItem[];
+  path: string;
+  isExpense: boolean;
+  open: Set<string>;
+  toggle: (key: string) => void;
+  depth: number;
+}) {
   return (
-    <span className="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-foreground">
-      <Equal className={cls} />
-    </span>
+    <>
+      {items.map((item, i) => {
+        const key = `${path}/${i}`;
+        const expandable = !!item.children?.length;
+        const expanded = expandable && open.has(key);
+        return (
+          <Fragment key={key}>
+            <tr
+              className={cn(
+                "border-b border-border/50 last:border-b-0 bg-muted/30",
+                expandable && expanded && "border-b-0",
+              )}
+            >
+              <td className="py-2" style={{ paddingLeft: 40 + depth * 22 }}>
+                <button
+                  type="button"
+                  onClick={() => toggle(key)}
+                  className={cn(
+                    "flex w-full items-center gap-1 rounded text-left text-sm text-muted-foreground",
+                    expandable && "cursor-pointer hover:text-primary",
+                  )}
+                  disabled={!expandable}
+                  aria-expanded={expanded}
+                >
+                  {expandable && (
+                    <ChevronDown
+                      className={cn(
+                        "h-3.5 w-3.5 shrink-0 transition-transform",
+                        expanded && "rotate-180",
+                      )}
+                    />
+                  )}
+                  <span>{item.label}</span>
+                </button>
+              </td>
+              <td
+                className={cn(
+                  "text-right py-2 pr-3 text-sm tabular-nums",
+                  item.value < 0
+                    ? "text-destructive"
+                    : isExpense
+                      ? "text-foreground"
+                      : "text-success",
+                )}
+              >
+                {formatBRL(item.value)}
+              </td>
+              <td className="text-right py-2 pr-2">
+                <span className="text-xs text-muted-foreground">—</span>
+              </td>
+            </tr>
+            {expanded && item.children && (
+              <BreakRows
+                items={item.children}
+                path={key}
+                isExpense={isExpense}
+                open={open}
+                toggle={toggle}
+                depth={depth + 1}
+              />
+            )}
+          </Fragment>
+        );
+      })}
+    </>
   );
 }
 
 export function DreTable() {
   const { dataset, periodKeys, previousKeys } = useFinance();
-  const rows = dataset ? buildDre(dataset, periodKeys) : [];
-  const prevRows = dataset && previousKeys.length ? buildDre(dataset, previousKeys) : [];
+  const rows = dataset ? buildSimpleDre(dataset, periodKeys) : [];
+  const prevRows = dataset && previousKeys.length ? buildSimpleDre(dataset, previousKeys) : [];
 
-  const [expandedRows, setExpandedRows] = useState<Set<string>>(new Set(["receitas"]));
-
-  const toggleRow = (id: string) => {
-    setExpandedRows((prev) => {
+  const [open, setOpen] = useState<Set<string>>(
+    () => new Set(rows.filter((r) => r.children?.length).map((r) => r.id)),
+  );
+  const toggle = (key: string) =>
+    setOpen((prev) => {
       const next = new Set(prev);
-      if (next.has(id)) {
-        next.delete(id);
-      } else {
-        next.add(id);
-      }
+      if (next.has(key)) next.delete(key);
+      else next.add(key);
       return next;
     });
-  };
 
   return (
     <div className="rounded-2xl bg-card p-5 md:p-6 border border-border/60">
-      <div className="mb-5 flex flex-wrap items-center justify-between gap-2">
-        <div>
-          <h3 className="text-base font-bold">
-            <span className="text-primary">DRE</span>: Demonstrativo de Resultado do Exercício
-          </h3>
-          <p className="text-sm text-muted-foreground">
-            {dataset ? `Fonte: aba DFC ANO — ${dataset.fileName}` : "Aguardando importação da planilha"}
-          </p>
-        </div>
-        {rows.length > 0 && (
-          <span className="text-xs text-muted-foreground bg-muted/60 px-2.5 py-1 rounded-full border border-border/40">
-            Clique na categoria para expandir subitens
-          </span>
-        )}
+      <div className="mb-5">
+        <h3 className="text-base font-bold">
+          <span className="text-primary">DRE</span>: Demonstrativo de Resultado do Exercício
+        </h3>
+        <p className="text-sm text-muted-foreground">
+          {dataset
+            ? `Fonte: aba DFC ANO — ${dataset.fileName}`
+            : "Aguardando importação da planilha"}
+        </p>
       </div>
 
       {rows.length === 0 ? (
@@ -69,7 +126,7 @@ export function DreTable() {
         </p>
       ) : (
         <div className="overflow-x-auto">
-          <table className="w-full min-w-[560px] text-sm border-collapse">
+          <table className="w-full min-w-[520px] text-sm border-collapse">
             <thead>
               <tr className="text-xs uppercase tracking-wider text-muted-foreground border-b border-border">
                 <th className="text-left font-medium py-2.5 pl-2">Descrição</th>
@@ -77,28 +134,105 @@ export function DreTable() {
                 <th className="text-right font-medium py-2.5 pr-2 w-24">Variação</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-border/50">
-              {rows.map((r, i) => {
-                const prev = prevRows[i]?.value ?? 0;
+            <tbody>
+              {rows.map((r) => {
+                const prevRow = prevRows.find((p) => p.id === r.id);
+                const prev = prevRow?.value ?? 0;
                 const variation = delta(r.value, prev);
                 const hasVariation = prevRows.length > 0 && prev !== 0;
-                const isExpandable = Boolean(r.hasChildren && r.children && r.children.length > 0);
-                const isExpanded = expandedRows.has(r.id);
+
+                const isHighlight = HIGHLIGHT_IDS.has(r.id);
+                const expandable = !!r.children?.length;
+                const expanded = expandable && open.has(r.id);
 
                 return (
-                  <FragmentRow
-                    key={r.id || r.label}
-                    row={r}
-                    prevValue={prev}
-                    variation={variation}
-                    hasVariation={hasVariation}
-                    isExpandable={isExpandable}
-                    isExpanded={isExpanded}
-                    onToggle={() => isExpandable && toggleRow(r.id)}
-                    prevRows={prevRows}
-                    periodKeys={periodKeys}
-                    previousKeys={previousKeys}
-                  />
+                  <Fragment key={r.id || r.label}>
+                    <tr
+                      className={cn(
+                        "border-b border-border/50 last:border-b-0 transition-colors",
+                        r.kind === "total" && "border-b border-border/70",
+                        isHighlight && "bg-primary/[0.06] font-bold border-l-4 border-primary",
+                        expandable && expanded && "border-b-0",
+                      )}
+                    >
+                      <td className="py-3 pl-3">
+                        <span
+                          className={cn(
+                            "flex items-center tracking-tight",
+                            isHighlight
+                              ? "text-[15px] font-extrabold text-foreground"
+                              : "font-medium",
+                            r.indent && "pl-5",
+                          )}
+                        >
+                          <button
+                            type="button"
+                            onClick={() => toggle(r.id)}
+                            className={cn(
+                              "flex w-full items-center gap-1 rounded text-left",
+                              expandable && "cursor-pointer hover:text-primary",
+                            )}
+                            disabled={!expandable}
+                            aria-expanded={expanded}
+                          >
+                            {expandable && (
+                              <ChevronDown
+                                className={cn(
+                                  "-ml-1 h-4 w-4 shrink-0 transition-transform text-muted-foreground",
+                                  expanded && "rotate-180",
+                                )}
+                              />
+                            )}
+                            <span>{r.label}</span>
+                          </button>
+                        </span>
+                      </td>
+                      <td
+                        className={cn(
+                          "text-right py-3 tabular-nums",
+                          isHighlight ? "text-[15px] font-extrabold" : "font-semibold",
+                          r.value < 0
+                            ? "text-destructive"
+                            : r.kind === "expense"
+                              ? "text-foreground"
+                              : "text-success",
+                        )}
+                      >
+                        {formatBRL(r.value)}
+                      </td>
+                      <td className="text-right py-3 pr-2">
+                        {hasVariation ? (
+                          <span
+                            className={cn(
+                              "inline-flex items-center gap-1 rounded-md px-2 py-1 text-xs font-semibold",
+                              variation >= 0
+                                ? "bg-success-soft text-success"
+                                : "bg-danger-soft text-destructive",
+                            )}
+                          >
+                            {variation >= 0 ? (
+                              <ArrowUp className="h-3 w-3" />
+                            ) : (
+                              <ArrowDown className="h-3 w-3" />
+                            )}
+                            {Math.abs(variation).toFixed(1)}%
+                          </span>
+                        ) : (
+                          <span className="text-xs text-muted-foreground">—</span>
+                        )}
+                      </td>
+                    </tr>
+                    {expanded && r.children && (
+                      <BreakRows
+                        items={r.children}
+                        path={`main-${r.id}`}
+                        isExpense={r.kind === "expense"}
+                        open={open}
+                        toggle={toggle}
+                        depth={0}
+                      />
+                    )}
+                  </Fragment>
                 );
               })}
             </tbody>
@@ -106,131 +240,5 @@ export function DreTable() {
         </div>
       )}
     </div>
-  );
-}
-
-function FragmentRow({
-  row,
-  variation,
-  hasVariation,
-  isExpandable,
-  isExpanded,
-  onToggle,
-}: {
-  row: DreLine;
-  prevValue: number;
-  variation: number;
-  hasVariation: boolean;
-  isExpandable: boolean;
-  isExpanded: boolean;
-  onToggle: () => void;
-  prevRows: DreLine[];
-  periodKeys: string[];
-  previousKeys: string[];
-}) {
-  return (
-    <>
-      <tr
-        onClick={onToggle}
-        className={cn(
-          "transition-colors group",
-          isExpandable ? "cursor-pointer hover:bg-muted/50" : "",
-          row.kind === "total" && "bg-muted/40 font-semibold",
-          isExpanded && isExpandable && "bg-muted/30",
-        )}
-      >
-        <td className="py-3 pl-2">
-          <div className={cn("flex items-center gap-2.5", row.indent && "pl-5")}>
-            {/* Expand/Collapse Chevron Indicator */}
-            {isExpandable ? (
-              <button
-                type="button"
-                className="grid h-5 w-5 place-items-center rounded hover:bg-accent text-muted-foreground group-hover:text-foreground transition-colors shrink-0 -ml-1"
-                aria-label={isExpanded ? "Recolher subcategorias" : "Expandir subcategorias"}
-              >
-                {isExpanded ? (
-                  <ChevronDown className="h-4 w-4 text-primary" />
-                ) : (
-                  <ChevronRight className="h-4 w-4" />
-                )}
-              </button>
-            ) : row.indent ? (
-              <CornerDownRight className="h-3.5 w-3.5 text-muted-foreground/60 shrink-0 -ml-5" />
-            ) : (
-              <span className="w-4 shrink-0" />
-            )}
-
-            <KindIcon kind={row.kind} />
-            <span
-              className={cn(
-                "font-medium tracking-tight",
-                row.kind === "total" && "font-bold text-foreground",
-                isExpandable && "group-hover:text-primary transition-colors",
-              )}
-            >
-              {row.label}
-            </span>
-            {isExpandable && (
-              <span className="text-[11px] font-normal text-muted-foreground/70 bg-muted/80 px-1.5 py-0.5 rounded border border-border/40 ml-1">
-                {row.children?.length} {row.children?.length === 1 ? "item" : "itens"}
-              </span>
-            )}
-          </div>
-        </td>
-        <td
-          className={cn(
-            "text-right py-3 font-semibold tabular-nums",
-            row.value < 0 ? "text-destructive" : row.kind === "expense" ? "text-foreground" : "text-success",
-          )}
-        >
-          {formatBRL(row.value)}
-        </td>
-        <td className="text-right py-3 pr-2">
-          {hasVariation ? (
-            <span
-              className={cn(
-                "inline-flex items-center gap-1 rounded-md px-2 py-1 text-xs font-semibold",
-                variation >= 0 ? "bg-success-soft text-success" : "bg-danger-soft text-destructive",
-              )}
-            >
-              {variation >= 0 ? <ArrowUp className="h-3 w-3" /> : <ArrowDown className="h-3 w-3" />}
-              {Math.abs(variation).toFixed(1)}%
-            </span>
-          ) : (
-            <span className="text-xs text-muted-foreground">—</span>
-          )}
-        </td>
-      </tr>
-
-      {/* Render Subcategories when Expanded */}
-      {isExpandable && isExpanded && row.children && row.children.length > 0 && (
-        <>
-          {row.children.map((child) => (
-            <tr
-              key={child.id}
-              className="bg-muted/20 hover:bg-muted/40 transition-colors border-b border-border/30 text-xs"
-            >
-              <td className="py-2.5 pl-11 md:pl-14">
-                <div className="flex items-center gap-2 text-muted-foreground">
-                  <CornerDownRight className="h-3 w-3 text-muted-foreground/50 shrink-0" />
-                  <span className="font-normal text-foreground/90">{child.label}</span>
-                </div>
-              </td>
-              <td
-                className={cn(
-                  "text-right py-2.5 font-medium tabular-nums text-xs",
-                  child.value < 0 ? "text-destructive" : child.kind === "expense" ? "text-foreground/80" : "text-success",
-                )}
-              >
-                {formatBRL(child.value)}
-              </td>
-              <td className="text-right py-2.5 pr-2">
-                <span className="text-[11px] text-muted-foreground">—</span>
-              </td>
-            </tr>
-          ))}
-        </>
-      )}
-    </>
   );
 }

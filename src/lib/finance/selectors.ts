@@ -40,7 +40,9 @@ export function resolvePeriods(dataset: FinanceDataset, selection: PeriodSelecti
       return all.length > 1 ? [all[all.length - 2]] : all.slice(-1);
     }
     case "this-year": {
-      const year = all.some((p) => p.year === now.getFullYear()) ? now.getFullYear() : all[all.length - 1].year;
+      const year = all.some((p) => p.year === now.getFullYear())
+        ? now.getFullYear()
+        : all[all.length - 1].year;
       return all.filter((p) => p.year === year);
     }
     case "last-12":
@@ -85,6 +87,51 @@ export function expenseBreakdown(dataset: FinanceDataset, keys: string[]): Expen
 
 export function totalDespesas(dataset: FinanceDataset, keys: string[]): number {
   return dataset.despesaGroups.reduce((acc, g) => acc + sumSeries(g, keys), 0);
+}
+
+export type TopExpenseItem = {
+  /** Nome da categoria (ex.: Investimentos). */
+  label: string;
+  /** Soma das subcontas da categoria no período. */
+  value: number;
+  /** Subcontas que compõem a categoria (para detalhamento no tooltip). */
+  children: { label: string; value: number }[];
+};
+
+/** Grupos que compõem "Despesas Fixas da Clínica" na DRE. */
+const FIXED_EXPENSE_LABELS = new Set([
+  "Gastos com Pessoal",
+  "Despesas Administrativas",
+  "Materiais e Equipamentos",
+  "Despesas com Veículos",
+  "Despesas Financeiras",
+  "Investimentos",
+]);
+
+/**
+ * Top N categorias de "Despesas Fixas da Clínica" da DRE no período, agregadas
+ * pela soma das suas subcontas (contas-filhas), ordenadas por magnitude.
+ */
+export function topExpenseItems(
+  dataset: FinanceDataset,
+  keys: string[],
+  limit: number,
+): TopExpenseItem[] {
+  const items: TopExpenseItem[] = [];
+  for (const g of dataset.despesaGroups) {
+    if (!FIXED_EXPENSE_LABELS.has(g.label)) continue;
+    const value = sumSeries(g, keys);
+    if (Math.abs(value) <= 0.005) continue;
+
+    const subs = (g.children ?? [])
+      .map((c) => ({ label: c.label, value: sumSeries(c, keys) }))
+      .filter((s) => Math.abs(s.value) > 0.005)
+      .sort((a, b) => Math.abs(b.value) - Math.abs(a.value));
+
+    items.push({ label: g.label, value, children: subs });
+  }
+  items.sort((a, b) => Math.abs(b.value) - Math.abs(a.value));
+  return items.slice(0, limit);
 }
 
 export function totalReceitas(dataset: FinanceDataset, keys: string[]): number {
@@ -168,132 +215,276 @@ export function monthCategorySeries(dataset: FinanceDataset, periodKey: string):
   return points;
 }
 
+/** Item componente de uma linha da DRE (conta/grupo que a compõe). */
+export type DreBreakItem = {
+  label: string;
+  value: number;
+  /** Subcontas que compõem este item (para itens que são grupos). */
+  children?: DreBreakItem[];
+};
+
 export type DreLine = {
   id: string;
   label: string;
   value: number;
   kind: "income" | "expense" | "total";
   indent?: boolean;
-  hasChildren?: boolean;
-  children?: DreLine[];
+  /** Grupos de contas que compõem esta linha (somente os com movimentação). */
+  children?: DreBreakItem[];
 };
 
-export function buildDre(dataset: FinanceDataset, keys: string[]): DreLine[] {
+/** Guarda o label normalizado (sem acentos, minúsculas) para casar padrões. */
+function normalizeLabel(label: string): string {
+  return label
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase();
+}
+
+function findChild(row: SeriesRow | undefined, keys: string[], matcher: RegExp): number {
+  if (!row?.children) return 0;
+  for (const c of row.children) {
+    if (matcher.test(normalizeLabel(c.label))) return sumSeries(c, keys);
+  }
+  return 0;
+}
+
+/** Soma dos grupos de despesas fixas (5.x) + investimentos, excluindo pró-labore. */
+function despesasFixasTotal(dataset: FinanceDataset, keys: string[], prolabore: number): number {
+  const fixedLabels = new Set([
+    "Gastos com Pessoal",
+    "Despesas Administrativas",
+    "Materiais e Equipamentos",
+    "Despesas com Veículos",
+    "Despesas Financeiras",
+  ]);
+  let total = 0;
+  for (const row of dataset.despesaGroups) {
+    if (fixedLabels.has(row.label)) total += sumSeries(row, keys);
+  }
+  const invest = dataset.despesaGroups.find((g) => g.label === "Investimentos");
+  if (invest) total += sumSeries(invest, keys);
+  return total - prolabore;
+}
+
+/** Filtra itens com valor ~0 (sem movimentação). */
+function breaks(items: DreBreakItem[]): DreBreakItem[] {
+  return items.filter((i) => Math.abs(i.value) > 0.005);
+}
+
+/**
+ * Converte linhas filhos de uma série em itens de breakdown de forma recursiva,
+ * permitindo explorar subgrupos (ex.: grupo -> contas que o compõem).
+ * `exclude` remove contas específicas (ex.: pró-labore de Gastos com Pessoal).
+ */
+function rowBreaks(
+  rows: SeriesRow[] | undefined,
+  keys: string[],
+  exclude?: (label: string) => boolean,
+): DreBreakItem[] {
+  if (!rows) return [];
+  const items: DreBreakItem[] = [];
+  for (const r of rows) {
+    const label = r.label;
+    if (exclude && exclude(label)) continue;
+    const item: DreBreakItem = { label, value: sumSeries(r, keys) };
+    const nested = rowBreaks(r.children, keys, exclude);
+    if (nested.length) item.children = nested;
+    items.push(item);
+  }
+  return breaks(items);
+}
+
+/**
+ * DRE simplificada, pensada para facilitar a leitura da cliente e a explicação
+ * do consultor — apresenta apenas linhas principais, sem subcategorias.
+ */
+export function buildSimpleDre(dataset: FinanceDataset, keys: string[]): DreLine[] {
   const lines: DreLine[] = [];
 
-  // Total de Receitas
-  const receitasVal = totalReceitas(dataset, keys);
-  const receitasChildren: DreLine[] | undefined = dataset.receitas?.children
-    ?.map((c) => ({
-      id: `receitas-${c.label}`,
-      label: c.label,
-      value: sumSeries(c, keys),
-      kind: "income" as const,
-      indent: true,
-    }))
-    .filter((c) => Math.abs(c.value) > 0.001);
-
+  // ---- Faturamento (+)
+  const faturamento = totalReceitas(dataset, keys);
+  const receitaItems = rowBreaks(dataset.receitas?.children, keys);
   lines.push({
-    id: "receitas",
-    label: "Total de Receitas",
-    value: receitasVal,
+    id: "faturamento",
+    label: "Faturamento",
+    value: faturamento,
     kind: "income",
-    hasChildren: Boolean(receitasChildren && receitasChildren.length > 0),
-    children: receitasChildren,
+    children: receitaItems,
   });
 
-  // Custos Variáveis
   const custos = dataset.despesaGroups.find((g) => g.label === "Custos Variáveis");
-  if (custos) {
-    const custosChildren: DreLine[] | undefined = custos.children
-      ?.map((c) => ({
-        id: `custos-${c.label}`,
-        label: c.label,
-        value: -sumSeries(c, keys),
-        kind: "expense" as const,
-        indent: true,
-      }))
-      .filter((c) => Math.abs(c.value) > 0.001);
-    lines.push({
-      id: `group-${custos.label}`,
-      label: custos.label,
-      value: -sumSeries(custos, keys),
-      kind: "expense",
-      hasChildren: Boolean(custosChildren && custosChildren.length > 0),
-      children: custosChildren,
-    });
-  }
+  const custosTotal = custos ? sumSeries(custos, keys) : 0;
 
-  // Margem de Contribuição
+  // ---- Despesas Tributárias (-)
+  const tributaryChildren =
+    custos?.children?.filter((c) =>
+      /tribut|pis|cofins|icms|csll|irpj|dae|imposto|simples|taxa/.test(normalizeLabel(c.label)),
+    ) ?? [];
+  const tributarias = tributaryChildren.reduce((acc, c) => acc + sumSeries(c, keys), 0);
   lines.push({
-    id: "margem-contribuicao",
-    label: "Margem de Contribuição",
-    value: margemContribuicao(dataset, keys),
+    id: "desp-tributarias",
+    label: "Despesas Tributárias",
+    value: -tributarias,
+    kind: "expense",
+    children: rowBreaks(tributaryChildren, keys),
+  });
+
+  // ---- Despesas com Comissões (-)
+  const comissaoChildren =
+    custos?.children?.filter((c) => /comiss/.test(normalizeLabel(c.label))) ?? [];
+  const comissoes = comissaoChildren.reduce((acc, c) => acc + sumSeries(c, keys), 0);
+  lines.push({
+    id: "desp-comissoes",
+    label: "Despesas com Comissões",
+    value: -comissoes,
+    kind: "expense",
+    children: rowBreaks(comissaoChildren, keys),
+  });
+
+  // ---- Despesas com Produtos (-) -> restante dos custos variáveis
+  const produtos = custosTotal - tributarias - comissoes;
+  const produtoChildren =
+    custos?.children?.filter((c) => {
+      const label = normalizeLabel(c.label);
+      return !/(tribut|pis|cofins|icms|csll|irpj|dae|imposto|simples|taxa|comiss)/.test(label);
+    }) ?? [];
+  lines.push({
+    id: "desp-produtos",
+    label: "Despesas com Produtos",
+    value: -produtos,
+    kind: "expense",
+    children: rowBreaks(produtoChildren, keys),
+  });
+
+  // ---- Lucro Bruto (=)
+  const lucroBruto = faturamento - custosTotal;
+  lines.push({
+    id: "lucro-bruto",
+    label: "Lucro Bruto",
+    value: lucroBruto,
     kind: "total",
     indent: true,
   });
 
-  // Demais grupos de despesas
-  for (const g of dataset.despesaGroups) {
-    if (g.label === "Custos Variáveis" || g.label === "Investimentos") continue;
-    const gChildren: DreLine[] | undefined = g.children
-      ?.map((c) => ({
-        id: `group-${g.label}-${c.label}`,
-        label: c.label,
-        value: -sumSeries(c, keys),
-        kind: "expense" as const,
-        indent: true,
-      }))
-      .filter((c) => Math.abs(c.value) > 0.001);
-    lines.push({
-      id: `group-${g.label}`,
-      label: g.label,
-      value: -sumSeries(g, keys),
-      kind: "expense",
-      hasChildren: Boolean(gChildren && gChildren.length > 0),
-      children: gChildren,
-    });
-  }
+  // ---- Pró-labore (-) -> dentro de Gastos com Pessoal
+  const pessoal = dataset.despesaGroups.find((g) => g.label === "Gastos com Pessoal");
+  const prolabore = findChild(pessoal, keys, /pro[- ]?labore/);
 
-  // Resultado Operacional
-  lines.push({
-    id: "resultado-operacional",
-    label: "Resultado Operacional",
-    value: resultadoOperacional(dataset, keys),
-    kind: "total",
-    indent: true,
-  });
-
-  // Investimentos
+  // ---- Despesas Fixas da Clínica (-)
+  const fixedLabels = new Set([
+    "Gastos com Pessoal",
+    "Despesas Administrativas",
+    "Materiais e Equipamentos",
+    "Despesas com Veículos",
+    "Despesas Financeiras",
+  ]);
   const invest = dataset.despesaGroups.find((g) => g.label === "Investimentos");
+  const fixedGroupRows = dataset.despesaGroups.filter((g) => fixedLabels.has(g.label));
+  const despesasFixas =
+    fixedGroupRows.reduce((acc, g) => acc + sumSeries(g, keys), 0) +
+    (invest ? sumSeries(invest, keys) : 0) -
+    prolabore;
+
+  const fixedBreakItems: DreBreakItem[] = [];
+  const excludePessoal = (label: string) => /pro[- ]?labore/.test(normalizeLabel(label));
+  for (const g of fixedGroupRows) {
+    let v = sumSeries(g, keys);
+    if (g.label === "Gastos com Pessoal") v -= prolabore;
+    const exclude = g.label === "Gastos com Pessoal" ? excludePessoal : undefined;
+    const nested = rowBreaks(g.children, keys, exclude);
+    fixedBreakItems.push({
+      label: g.label,
+      value: v,
+      children: nested.length ? nested : undefined,
+    });
+  }
   if (invest) {
-    const investChildren: DreLine[] | undefined = invest.children
-      ?.map((c) => ({
-        id: `invest-${c.label}`,
-        label: c.label,
-        value: -sumSeries(c, keys),
-        kind: "expense" as const,
-        indent: true,
-      }))
-      .filter((c) => Math.abs(c.value) > 0.001);
-    lines.push({
-      id: `group-${invest.label}`,
+    const nested = rowBreaks(invest.children, keys);
+    fixedBreakItems.push({
       label: invest.label,
-      value: -sumSeries(invest, keys),
-      kind: "expense",
-      hasChildren: Boolean(investChildren && investChildren.length > 0),
-      children: investChildren,
+      value: sumSeries(invest, keys),
+      children: nested.length ? nested : undefined,
     });
   }
 
-  // Resultado Final
   lines.push({
-    id: "resultado-final",
-    label: "Resultado Final",
-    value: resultadoFinal(dataset, keys),
+    id: "desp-fixas",
+    label: "Despesas Fixas da Clínica",
+    value: -despesasFixas,
+    kind: "expense",
+    children: breaks(fixedBreakItems),
+  });
+
+  // ---- Lucro da Clínica (=)
+  const lucroClinica = lucroBruto - despesasFixas;
+  lines.push({
+    id: "lucro-clinica",
+    label: "Lucro da Clínica",
+    value: lucroClinica,
     kind: "total",
     indent: true,
   });
 
-  return lines;
+  // ---- Pró-labore (-)
+  lines.push({ id: "pro-labore", label: "Pró-labore", value: -prolabore, kind: "expense" });
+
+  // ---- Acertos de Caixa (-) e Saídas Não Operacionais (-)
+  const outras = dataset.despesaGroups.find((g) => g.label === "Outras Despesas Operacionais");
+  const acertosCaixa = findChild(outras, keys, /acerto/);
+  const saidasNaoOperacionais = findChild(
+    outras,
+    keys,
+    /nao operacional|saidas nao|saida nao operacional|resultado nao operacional/,
+  );
+  lines.push({
+    id: "acertos-caixa",
+    label: "Acertos de Caixa",
+    value: -acertosCaixa,
+    kind: "expense",
+  });
+  lines.push({
+    id: "saidas-nao-op",
+    label: "Saídas Não Operacionais",
+    value: -saidasNaoOperacionais,
+    kind: "expense",
+  });
+
+  // ---- Lucro Líquido (=)
+  const lucroLiquido = saldoFinal(dataset, keys);
+  lines.push({
+    id: "lucro-liquido",
+    label: "Lucro Líquido",
+    value: lucroLiquido,
+    kind: "total",
+    indent: true,
+  });
+
+  // Oculta linhas sem movimentação (valor ~0) para manter a DRE limpa,
+  // mas sempre preserva as linhas de total (Lucro Bruto, da Clínica, Líquido).
+  return lines.filter((l) => l.kind === "total" || Math.abs(l.value) > 0.005);
+}
+
+/** Lucro Bruto do período: Faturamento - Custos Variáveis. */
+export function lucroBruto(dataset: FinanceDataset, keys: string[]): number {
+  const custos = dataset.despesaGroups.find((g) => g.label === "Custos Variáveis");
+  const custosTotal = custos ? sumSeries(custos, keys) : 0;
+  return totalReceitas(dataset, keys) - custosTotal;
+}
+
+/** Lucro da Clínica do período: Lucro Bruto - Despesas Fixas. */
+export function lucroClinica(dataset: FinanceDataset, keys: string[]): number {
+  const fixas = despesasFixasTotal(dataset, keys, proLabore(dataset, keys));
+  return lucroBruto(dataset, keys) - fixas;
+}
+
+/** Pró-labore do período (item "Pró-labores" em Gastos com Pessoal). */
+export function proLabore(dataset: FinanceDataset, keys: string[]): number {
+  const pessoal = dataset.despesaGroups.find((g) => g.label === "Gastos com Pessoal");
+  return findChild(pessoal, keys, /pro[- ]?labore/);
+}
+
+/** Despesas Fixas da Clínica do período (fixas + investimentos - pró-labore). */
+export function despesasFixasClinica(dataset: FinanceDataset, keys: string[]): number {
+  return despesasFixasTotal(dataset, keys, proLabore(dataset, keys));
 }
