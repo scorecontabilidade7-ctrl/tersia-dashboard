@@ -54,9 +54,10 @@ export function PeriodFilter() {
             </option>
           ))}
         </select>
-        <span className="pointer-events-none absolute right-2.5 text-xs text-muted-foreground">▼</span>
+        <span className="pointer-events-none absolute right-2.5 text-xs text-muted-foreground">
+          ▼
+        </span>
       </div>
     </div>
   );
 }
-

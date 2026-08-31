@@ -48,7 +48,12 @@ export function KpiCard({
           {label}
         </p>
         {Icon && (
-          <div className={cn("flex h-10 w-10 shrink-0 items-center justify-center rounded-xl transition-colors", finalIconBg)}>
+          <div
+            className={cn(
+              "flex h-10 w-10 shrink-0 items-center justify-center rounded-xl transition-colors",
+              finalIconBg,
+            )}
+          >
             <Icon className="h-5 w-5" />
           </div>
         )}
@@ -76,5 +81,3 @@ export function KpiCard({
     </div>
   );
 }
-
-

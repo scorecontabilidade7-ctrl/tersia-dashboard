@@ -8,6 +8,7 @@ import {
   ArrowUpRight,
   PiggyBank,
   UserRound,
+  Cloud,
 } from "lucide-react";
 import { KpiCard } from "@/components/dashboard/kpi-card";
 import { PerformanceChart } from "@/components/dashboard/performance-chart";
@@ -15,6 +16,9 @@ import { TopExpensesChart } from "@/components/dashboard/top-expenses-chart";
 import { DreTable } from "@/components/dashboard/dre-table";
 import { ImportPlanilha } from "@/components/dashboard/import-planilha";
 import { PeriodFilter } from "@/components/dashboard/period-filter";
+import { UserNav } from "@/components/dashboard/user-nav";
+import { AuthView } from "@/components/auth/auth-view";
+import { useAuth } from "@/lib/auth/auth-context";
 import { useFinance } from "@/lib/finance/finance-store";
 import { delta, lucroBruto, lucroClinica, proLabore, totalReceitas } from "@/lib/finance/selectors";
 import { formatBRL, formatDateTime } from "@/lib/finance/format";
@@ -38,6 +42,7 @@ export const Route = createFileRoute("/")({
 });
 
 function FinanceiroPage() {
+  const { isAuthenticated, isLoading: authLoading } = useAuth();
   const { dataset, periodKeys, previousKeys, status, errorMessage, successMessage } = useFinance();
 
   const faturamento = dataset ? totalReceitas(dataset, periodKeys) : 0;
@@ -48,22 +53,48 @@ function FinanceiroPage() {
   const hasPrev = !!dataset && previousKeys.length > 0;
   const d = (current: number, previous: number) => (hasPrev ? delta(current, previous) : null);
 
+  // Exibe tela de carregamento durante a verificação de sessão
+  if (authLoading) {
+    return (
+      <div className="flex min-h-screen w-full items-center justify-center bg-background">
+        <div className="flex flex-col items-center gap-3">
+          <Loader2 className="h-8 w-8 animate-spin text-primary" />
+          <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+            Verificando acesso seguro...
+          </p>
+        </div>
+      </div>
+    );
+  }
+
+  // Se não estiver logado, exibe a tela de login/cadastro
+  if (!isAuthenticated) {
+    return <AuthView />;
+  }
+
   return (
     <main className="flex-1 px-4 py-6 md:px-8 md:py-8">
       {/* Header */}
-      <header className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-4 mb-6 lg:flex lg:flex-wrap lg:justify-between">
+      <header className="grid grid-cols-1 items-center gap-4 mb-6 lg:flex lg:flex-wrap lg:justify-between">
         <div className="flex min-w-0 items-center gap-3">
           <img
             src="/logo-dra-tersia.jpeg"
             alt="Logo Dra. Térsia"
             className="h-11 w-auto rounded-lg object-contain ring-1 ring-border shadow-sm"
           />
-          <h1 className="truncate text-2xl md:text-3xl font-black tracking-tight">
-            Dra. Térsia | Financeiro
-          </h1>
+          <div>
+            <h1 className="truncate text-xl md:text-2xl font-black tracking-tight">
+              Dra. Térsia | Financeiro
+            </h1>
+            <p className="text-[11px] text-muted-foreground hidden sm:block">
+              Gestão executiva, KPIs e DRE em tempo real
+            </p>
+          </div>
         </div>
-        <div className="col-span-2 lg:col-auto">
+
+        <div className="flex flex-wrap items-center gap-3">
           <PeriodFilter />
+          <UserNav />
         </div>
       </header>
 
@@ -71,7 +102,7 @@ function FinanceiroPage() {
       {status === "loading" && (
         <div className="mb-4 flex items-center gap-2 rounded-xl bg-card border border-border/60 p-3 text-sm">
           <Loader2 className="h-4 w-4 animate-spin text-primary" />
-          Processando arquivo...
+          Processando arquivo e sincronizando com a nuvem...
         </div>
       )}
       {status !== "loading" && errorMessage && (
@@ -89,15 +120,23 @@ function FinanceiroPage() {
       {!dataset && status !== "loading" && !errorMessage && (
         <div className="mb-4 flex items-start gap-2 rounded-xl bg-card border border-border/60 p-3 text-sm text-muted-foreground">
           <Info className="mt-0.5 h-4 w-4 shrink-0" />
-          Importe uma planilha financeira para visualizar os dados.
+          Importe uma planilha financeira para visualizar os dados ou aguarde a sincronização com o
+          banco.
         </div>
       )}
       {dataset && (
-        <p className="mb-4 text-xs text-muted-foreground">
-          Última atualização:{" "}
-          <span className="font-medium text-foreground">{dataset.fileName}</span> ·{" "}
-          {formatDateTime(dataset.importedAt)}
-        </p>
+        <div className="mb-4 flex flex-wrap items-center justify-between gap-2 text-xs text-muted-foreground">
+          <p>
+            Última atualização:{" "}
+            <span className="font-medium text-foreground">{dataset.fileName}</span> ·{" "}
+            {formatDateTime(dataset.importedAt)}
+          </p>
+          <div className="flex items-center gap-1.5 rounded-md bg-muted/60 px-2 py-0.5 text-[11px] font-medium text-muted-foreground">
+            <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
+            <Cloud className="h-3 w-3 text-primary" />
+            Nuvem Supabase Ativa
+          </div>
+        </div>
       )}
 
       <div className="grid grid-cols-1 xl:grid-cols-[minmax(0,1fr)_320px] gap-6">
@@ -114,41 +153,42 @@ function FinanceiroPage() {
               delta={d(faturamento, dataset ? totalReceitas(dataset, previousKeys) : 0)}
             />
             <KpiCard
-              label="Lucro Bruto"
-              rawValue={lucroBrutoVal}
-              tone="auto"
-              icon={ArrowUpRight}
-              iconBg="bg-blue-500/15 text-blue-600 dark:text-blue-400"
-              delta={d(lucroBrutoVal, dataset ? lucroBruto(dataset, previousKeys) : 0)}
-            />
-            <KpiCard
               label="Lucro da Clínica"
               rawValue={lucroClinicaVal}
-              tone="auto"
-              icon={PiggyBank}
-              iconBg="bg-violet-500/15 text-violet-600 dark:text-violet-400"
+              tone="info"
+              icon={ArrowUpRight}
+              iconBg="bg-sky-500/15 text-sky-600 dark:text-sky-400"
               delta={d(lucroClinicaVal, dataset ? lucroClinica(dataset, previousKeys) : 0)}
             />
             <KpiCard
-              label="Pró-labore Dra. Térsia"
-              rawValue={proLaboreVal}
-              tone="auto"
-              icon={UserRound}
+              label="Lucro Bruto"
+              rawValue={lucroBrutoVal}
+              tone="warning"
+              icon={PiggyBank}
               iconBg="bg-amber-500/15 text-amber-600 dark:text-amber-400"
+              delta={d(lucroBrutoVal, dataset ? lucroBruto(dataset, previousKeys) : 0)}
+            />
+            <KpiCard
+              label="Pró-labore"
+              rawValue={proLaboreVal}
+              tone="accent"
+              icon={UserRound}
+              iconBg="bg-rose-500/15 text-rose-600 dark:text-rose-400"
               delta={d(proLaboreVal, dataset ? proLabore(dataset, previousKeys) : 0)}
             />
           </div>
 
-          <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
-            <PerformanceChart />
-            <TopExpensesChart />
-          </div>
+          {/* Gráfico de Desempenho */}
+          <PerformanceChart />
+
+          {/* DRE Completa */}
           <DreTable />
         </div>
 
-        {/* Side column */}
-        <aside className="space-y-6 min-w-0">
+        {/* Sidebar */}
+        <aside className="space-y-6">
           <ImportPlanilha />
+          <TopExpensesChart />
         </aside>
       </div>
     </main>

@@ -1,7 +1,13 @@
 import type * as XLSXNS from "xlsx";
 
 let XLSX: typeof XLSXNS;
-import { ImportError, type ExpenseGroup, type FinanceDataset, type Period, type SeriesRow } from "./types";
+import {
+  ImportError,
+  type ExpenseGroup,
+  type FinanceDataset,
+  type Period,
+  type SeriesRow,
+} from "./types";
 
 const SHEET_NAME = "DFC ANO";
 
@@ -20,7 +26,20 @@ const MONTHS = [
   "dezembro",
 ];
 
-const MONTH_LABELS = ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Set", "Out", "Nov", "Dez"];
+const MONTH_LABELS = [
+  "Jan",
+  "Fev",
+  "Mar",
+  "Abr",
+  "Mai",
+  "Jun",
+  "Jul",
+  "Ago",
+  "Set",
+  "Out",
+  "Nov",
+  "Dez",
+];
 
 export function normalize(text: string): string {
   return text
@@ -151,7 +170,7 @@ function toNumber(cell: unknown): number | null {
 }
 
 function isAccountCode(str: string): boolean {
-  return /^\d+([\.\-]\d+)*$/.test(str.trim());
+  return /^\d+([.-]\d+)*$/.test(str.trim());
 }
 
 type RawRow = { label: string; norm: string; values: Record<string, number>; sum: number };
@@ -176,13 +195,37 @@ const MATCHERS = {
   ],
   margem: [/margem de contribuicao/],
   resultadoOperacional: [/resultado operacional/, /lucro operacional/],
-  resultadoFinal: [/resultado (final|liquido|do periodo)/, /resultado apos investimentos/, /lucro liquido/],
+  resultadoFinal: [
+    /resultado (final|liquido|do periodo)/,
+    /resultado apos investimentos/,
+    /lucro liquido/,
+  ],
   saldo: [/saldo acumulado/, /saldo final/, /saldo de caixa acumulado/],
-  investimentos: [/^investimentos?$/, /total (de )?investimentos?/, /gastos? (com|de) investimentos?/],
+  investimentos: [
+    /^investimentos?$/,
+    /total (de )?investimentos?/,
+    /gastos? (com|de) investimentos?/,
+  ],
   despesasFinanceiras: [/despesas? financeiras?/],
-  pessoal: [/gastos? (com|de) pessoal/, /despesas? (com|de) pessoal/, /folha de pagamento/, /pessoal/],
-  estrutura: [/gastos? (de|com) estrutura/, /despesas? (de|com) estrutura/, /despesas? (fixas|administrativas)/, /gastos? fixos/, /administrativas/],
-  outrasDespesas: [/outras (saidas|despesas)/, /outras? saida operacional/, /despesas? (nao operacionais|diversas)/, /nao operacionais/],
+  pessoal: [
+    /gastos? (com|de) pessoal/,
+    /despesas? (com|de) pessoal/,
+    /folha de pagamento/,
+    /pessoal/,
+  ],
+  estrutura: [
+    /gastos? (de|com) estrutura/,
+    /despesas? (de|com) estrutura/,
+    /despesas? (fixas|administrativas)/,
+    /gastos? fixos/,
+    /administrativas/,
+  ],
+  outrasDespesas: [
+    /outras (saidas|despesas)/,
+    /outras? saida operacional/,
+    /despesas? (nao operacionais|diversas)/,
+    /nao operacionais/,
+  ],
 };
 
 function matches(norm: string, patterns: RegExp[]): boolean {
@@ -206,7 +249,9 @@ function abs(series: SeriesRow | null): SeriesRow | null {
 
 export async function parseDfcWorkbook(file: File): Promise<FinanceDataset> {
   if (!/\.xlsx?$/i.test(file.name)) {
-    throw new ImportError("Não foi possível importar a planilha. O arquivo deve estar no formato XLSX.");
+    throw new ImportError(
+      "Não foi possível importar a planilha. O arquivo deve estar no formato XLSX.",
+    );
   }
 
   const buffer = await file.arrayBuffer();
@@ -220,11 +265,18 @@ export async function parseDfcWorkbook(file: File): Promise<FinanceDataset> {
 
   const sheetName = findSheet(wb);
   if (!sheetName) {
-    throw new ImportError("Não foi possível importar a planilha. A aba DFC ANO não foi encontrada.");
+    throw new ImportError(
+      "Não foi possível importar a planilha. A aba DFC ANO não foi encontrada.",
+    );
   }
 
   const sheet = wb.Sheets[sheetName];
-  const grid = XLSX.utils.sheet_to_json<unknown[]>(sheet, { header: 1, raw: true, defval: null, blankrows: true });
+  const grid = XLSX.utils.sheet_to_json<unknown[]>(sheet, {
+    header: 1,
+    raw: true,
+    defval: null,
+    blankrows: true,
+  });
 
   const fallbackYear = new Date().getFullYear();
 
@@ -245,7 +297,9 @@ export async function parseDfcWorkbook(file: File): Promise<FinanceDataset> {
     // verificar se a Coluna 0 é um falso positivo (ex: "Nov/33" isolado em A enquanto B..M são Jan..Dez)
     if (found.size > 1 && found.has(0)) {
       const p0 = found.get(0)!;
-      const otherPeriods = Array.from(found.entries()).filter(([c]) => c !== 0).map(([, p]) => p);
+      const otherPeriods = Array.from(found.entries())
+        .filter(([c]) => c !== 0)
+        .map(([, p]) => p);
       const commonYear = otherPeriods[0]?.year;
       if (commonYear && p0.year !== commonYear) {
         found.delete(0);
@@ -326,8 +380,8 @@ export async function parseDfcWorkbook(file: File): Promise<FinanceDataset> {
   const receitas = abs(
     toSeries(
       findRow(rows, [/faturamento/, /3 - faturamento/, /total (de )?receitas?/, /receita bruta/]) ??
-      findRow(detailedRows, [/entradas \(\+\)/, /total entradas/])
-    )
+        findRow(detailedRows, [/entradas \(\+\)/, /total entradas/]),
+    ),
   );
 
   if (!receitas) {
@@ -336,11 +390,19 @@ export async function parseDfcWorkbook(file: File): Promise<FinanceDataset> {
     );
   }
 
-  const custosVariaveis = abs(toSeries(findRow(rows, [/custos? variaveis?/, /4 - custos? variaveis?/])));
+  const custosVariaveis = abs(
+    toSeries(findRow(rows, [/custos? variaveis?/, /4 - custos? variaveis?/])),
+  );
   const margemContribuicao = toSeries(findRow(rows, [/margem de contribuicao/]));
-  const resultadoOperacional = toSeries(findRow(rows, [/lucro operacional \(=?\)/, /resultado operacional/]));
-  const resultadoFinal = toSeries(findRow(rows, [/8 - lucro liquido/, /lucro liquido/, /resultado (final|liquido)/]));
-  const saldoAcumulado = toSeries(findRow(rows, [/9 - saldo acumulado/, /saldo acumulado/, /saldo final/]));
+  const resultadoOperacional = toSeries(
+    findRow(rows, [/lucro operacional \(=?\)/, /resultado operacional/]),
+  );
+  const resultadoFinal = toSeries(
+    findRow(rows, [/8 - lucro liquido/, /lucro liquido/, /resultado (final|liquido)/]),
+  );
+  const saldoAcumulado = toSeries(
+    findRow(rows, [/9 - saldo acumulado/, /saldo acumulado/, /saldo final/]),
+  );
   const investimentos = abs(toSeries(findRow(rows, [/6 - investimentos/, /investimentos/])));
 
   // Consolidated Expense Groups from Resumo Section
@@ -384,7 +446,9 @@ export async function parseDfcWorkbook(file: File): Promise<FinanceDataset> {
       if (
         /^total/i.test(norm) ||
         /(=|\(\+\)|\(-\))/.test(rawLabel) ||
-        /resumo|detalhado|entradas total|custos variaveis|lucro operacional|margem de contribuicao|custos fixos|resultado nao operacionais|saldo acumulado/i.test(norm)
+        /resumo|detalhado|entradas total|custos variaveis|lucro operacional|margem de contribuicao|custos fixos|resultado nao operacionais|saldo acumulado/i.test(
+          norm,
+        )
       ) {
         continue;
       }
@@ -435,19 +499,31 @@ export async function parseDfcWorkbook(file: File): Promise<FinanceDataset> {
       if (!targetCategory) {
         if (/vendas?|faturamento|receita|pix|débito|crédito|dinheiro|entradas/i.test(norm)) {
           targetCategory = "Receitas";
-        } else if (/salário|folha|pro-labore|pró-labore|fgts|inss|rescisão|férias|13º|diarista|confraternização|horas extras/i.test(norm)) {
+        } else if (
+          /salário|folha|pro-labore|pró-labore|fgts|inss|rescisão|férias|13º|diarista|confraternização|horas extras/i.test(
+            norm,
+          )
+        ) {
           targetCategory = "Gastos com Pessoal";
-        } else if (/aluguel|energia|luz|água|telefone|internet|celular|iptu|licença|advogado|contador|matadouro/i.test(norm)) {
+        } else if (
+          /aluguel|energia|luz|água|telefone|internet|celular|iptu|licença|advogado|contador|matadouro/i.test(
+            norm,
+          )
+        ) {
           targetCategory = "Despesas Administrativas";
         } else if (/combustível|gasolina|diesel|frota|veículo/i.test(norm)) {
           targetCategory = "Despesas com Veículos";
         } else if (/tarifa|taxa|banco|doc|ted|maquininha/i.test(norm)) {
           targetCategory = "Despesas Financeiras";
-        } else if (/manutenção máquinas|compra de maquina|manutenção predial|expediente/i.test(norm)) {
+        } else if (
+          /manutenção máquinas|compra de maquina|manutenção predial|expediente/i.test(norm)
+        ) {
           targetCategory = "Materiais e Equipamentos";
         } else if (/marketing|propaganda|anúncio|bens|desenvolvimento/i.test(norm)) {
           targetCategory = "Investimentos";
-        } else if (/fornecedor|cmv|icms|pis|cofins|dae|simples|produtos|embalagem|comissão/i.test(norm)) {
+        } else if (
+          /fornecedor|cmv|icms|pis|cofins|dae|simples|produtos|embalagem|comissão/i.test(norm)
+        ) {
           targetCategory = "Custos Variáveis";
         }
       }

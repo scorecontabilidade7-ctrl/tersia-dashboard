@@ -11,6 +11,7 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { AuthProvider } from "@/lib/auth/auth-context";
 import { FinanceProvider } from "@/lib/finance/finance-store";
 
 function NotFoundComponent() {
@@ -69,9 +70,17 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:title", content: "Dra. Térsia | Financeiro" },
       { property: "og:description", content: "Gestão financeira executiva da Dra. Térsia." },
       { property: "og:type", content: "website" },
-      { property: "og:image", content: "https://lunsyufvxkiivnrhpxpj.supabase.co/storage/v1/object/public/utils/favicon.png" },
+      {
+        property: "og:image",
+        content:
+          "https://lunsyufvxkiivnrhpxpj.supabase.co/storage/v1/object/public/utils/favicon.png",
+      },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:image", content: "https://lunsyufvxkiivnrhpxpj.supabase.co/storage/v1/object/public/utils/favicon.png" },
+      {
+        name: "twitter:image",
+        content:
+          "https://lunsyufvxkiivnrhpxpj.supabase.co/storage/v1/object/public/utils/favicon.png",
+      },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
@@ -82,9 +91,16 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap",
       },
       { rel: "icon", href: "/favicon.png", type: "image/png" },
-      { rel: "icon", href: "https://lunsyufvxkiivnrhpxpj.supabase.co/storage/v1/object/public/utils/favicon.png", type: "image/png" },
+      {
+        rel: "icon",
+        href: "https://lunsyufvxkiivnrhpxpj.supabase.co/storage/v1/object/public/utils/favicon.png",
+        type: "image/png",
+      },
       { rel: "shortcut icon", href: "/favicon.ico", type: "image/x-icon" },
-      { rel: "apple-touch-icon", href: "https://lunsyufvxkiivnrhpxpj.supabase.co/storage/v1/object/public/utils/favicon.png" },
+      {
+        rel: "apple-touch-icon",
+        href: "https://lunsyufvxkiivnrhpxpj.supabase.co/storage/v1/object/public/utils/favicon.png",
+      },
     ],
   }),
   shellComponent: RootShell,
@@ -112,11 +128,13 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <FinanceProvider>
-        <div className="flex min-h-screen w-full bg-background">
-          <Outlet />
-        </div>
-      </FinanceProvider>
+      <AuthProvider>
+        <FinanceProvider>
+          <div className="min-h-screen w-full bg-background flex flex-col">
+            <Outlet />
+          </div>
+        </FinanceProvider>
+      </AuthProvider>
     </QueryClientProvider>
   );
 }

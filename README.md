@@ -49,15 +49,15 @@ de banco de dados ou APIs externas: tudo é processado e exibido no próprio nav
 
 ## Stack tecnológica
 
-| Camada            | Tecnologia                                              |
-| ----------------- | ------------------------------------------------------- |
-| Framework         | TanStack Start (React Router + SSR) com **React 19**    |
-| Build             | **Vite 8** + TypeScript 5                               |
-| Estilo            | **Tailwind CSS 4** + componentes **shadcn/ui** (Radix)  |
-| Gráficos          | **Recharts**                                            |
-| Parsing de Excel  | **xlsx** (SheetJS)                                      |
-| Estado global     | React Context (`FinanceProvider`) + TanStack Query      |
-| Validação/Form    | zod, react-hook-form, @hookform/resolvers (base p/ futuro) |
+| Camada           | Tecnologia                                                 |
+| ---------------- | ---------------------------------------------------------- |
+| Framework        | TanStack Start (React Router + SSR) com **React 19**       |
+| Build            | **Vite 8** + TypeScript 5                                  |
+| Estilo           | **Tailwind CSS 4** + componentes **shadcn/ui** (Radix)     |
+| Gráficos         | **Recharts**                                               |
+| Parsing de Excel | **xlsx** (SheetJS)                                         |
+| Estado global    | React Context (`FinanceProvider`) + TanStack Query         |
+| Validação/Form   | zod, react-hook-form, @hookform/resolvers (base p/ futuro) |
 
 ---
 
@@ -210,17 +210,17 @@ A planilha deve conter uma aba chamada **`DFC ANO`** com uma estrutura de **flux
 
 Códigos de conta reconhecidos (para as subcategorias do DRE):
 
-| Código | Categoria                          |
-| ------ | ---------------------------------- |
-| `3.x`  | Receitas                           |
-| `4.x`  | Custos Variáveis                   |
-| `5.1.x`| Despesas Financeiras               |
-| `5.2.x`| Despesas Administrativas           |
-| `5.3.x`| Gastos com Pessoal                 |
-| `5.4.x`| Materiais e Equipamentos           |
-| `5.5.x`| Despesas com Veículos              |
-| `6.x`  | Investimentos                      |
-| `7.x`  | Outras Despesas Operacionais       |
+| Código  | Categoria                    |
+| ------- | ---------------------------- |
+| `3.x`   | Receitas                     |
+| `4.x`   | Custos Variáveis             |
+| `5.1.x` | Despesas Financeiras         |
+| `5.2.x` | Despesas Administrativas     |
+| `5.3.x` | Gastos com Pessoal           |
+| `5.4.x` | Materiais e Equipamentos     |
+| `5.5.x` | Despesas com Veículos        |
+| `6.x`   | Investimentos                |
+| `7.x`   | Outras Despesas Operacionais |
 
 Linhas sem código numérico também são classificadas por **palavras-chave** no texto
 (ex.: "salário", "aluguel", "combustível", "tarifa", "marketing", "fornecedor").
@@ -232,12 +232,12 @@ e traços (`-`, `—`) = zero. Uma planilha de exemplo está em **`public/dfc-mo
 
 ## KPIs do Dashboard
 
-| Card                     | Cálculo                                                 |
-| ------------------------ | ------------------------------------------------------- |
-| **Total de Receitas**    | Soma do grupo de receitas no período                    |
-| **Total de Despesas**    | Soma de todos os grupos de despesa no período           |
+| Card                       | Cálculo                                                         |
+| -------------------------- | --------------------------------------------------------------- |
+| **Total de Receitas**      | Soma do grupo de receitas no período                            |
+| **Total de Despesas**      | Soma de todos os grupos de despesa no período                   |
 | **Margem de Contribuição** | Receitas − Custos Variáveis (busca linha explícita, se existir) |
-| **Saldo Final**          | Receitas − Despesas (ou linha de resultado final)       |
+| **Saldo Final**            | Receitas − Despesas (ou linha de resultado final)               |
 
 Cada card mostra o valor formatado em R$ e um **indicador de variação percentual** em
 relação ao período imediatamente anterior (seta para cima/baixo, cor verde/vermelha).
@@ -304,14 +304,14 @@ e, eventualmente, um backend para armazenar os dados importados.
 
 ## Scripts disponíveis
 
-| Comando          | Descrição                                 |
-| ---------------- | ----------------------------------------- |
-| `npm run dev`    | Servidor de desenvolvimento               |
-| `npm run build`  | Build otimizado de produção               |
-| `npm run build:dev` | Build em modo desenvolvimento          |
-| `npm run preview`  | Pré-visualizar o build                   |
-| `npm run lint`   | Verificação de lint (ESLint)              |
-| `npm run format` | Formatação automática (Prettier)          |
+| Comando             | Descrição                        |
+| ------------------- | -------------------------------- |
+| `npm run dev`       | Servidor de desenvolvimento      |
+| `npm run build`     | Build otimizado de produção      |
+| `npm run build:dev` | Build em modo desenvolvimento    |
+| `npm run preview`   | Pré-visualizar o build           |
+| `npm run lint`      | Verificação de lint (ESLint)     |
+| `npm run format`    | Formatação automática (Prettier) |
 
 ---
 

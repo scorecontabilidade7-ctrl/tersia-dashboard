@@ -10,12 +10,18 @@ import {
 import { parseDfcWorkbook } from "./parse-dfc";
 import { ImportError, type FinanceDataset, type Period } from "./types";
 import { resolvePeriods, previousWindow, type PeriodSelection } from "./selectors";
+import {
+  fetchLatestFinanceDataset,
+  saveFinanceDataset,
+  subscribeToFinanceUpdates,
+} from "@/lib/supabase/client";
 
 type Status = "empty" | "loading" | "ready" | "error";
 
 type FinanceContextValue = {
   dataset: FinanceDataset | null;
   status: Status;
+  isCloudSyncing: boolean;
   errorMessage: string | null;
   successMessage: string | null;
   selection: PeriodSelection;
@@ -24,11 +30,12 @@ type FinanceContextValue = {
   periodKeys: string[];
   previousKeys: string[];
   importFile: (file: File) => Promise<void>;
+  refreshFromCloud: () => Promise<void>;
 };
 
 const FinanceContext = createContext<FinanceContextValue | null>(null);
 
-/** Chave usada para persistir a última planilha importada no navegador. */
+/** Chave usada para persistir a última planilha importada no navegador (cache offline). */
 const STORAGE_KEY = "tersia-dashboard-dataset:v1";
 
 /** Tenta carregar a última planilha importada do armazenamento local. */
@@ -51,22 +58,82 @@ function loadStoredDataset(): FinanceDataset | null {
   }
 }
 
+/** Obtém a seleção padrão: o mês mais recente disponível com dados na planilha. */
+function getDefaultSelection(dataset: FinanceDataset | null): PeriodSelection {
+  if (!dataset || !Array.isArray(dataset.periods) || dataset.periods.length === 0) {
+    return { id: "this-year" };
+  }
+  const latest = dataset.periods[dataset.periods.length - 1];
+  return { id: "custom", from: latest.key, to: latest.key };
+}
+
 export function FinanceProvider({ children }: { children: ReactNode }) {
   const [initial] = useState(() => {
     const stored = loadStoredDataset();
     return {
       dataset: stored,
       status: (stored ? "ready" : "empty") as Status,
+      selection: getDefaultSelection(stored),
     };
   });
   const [dataset, setDataset] = useState<FinanceDataset | null>(initial.dataset);
   const [status, setStatus] = useState<Status>(initial.status);
+  const [isCloudSyncing, setIsCloudSyncing] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
-  const [selection, setSelection] = useState<PeriodSelection>({ id: "this-year" });
+  const [selection, setSelection] = useState<PeriodSelection>(initial.selection);
 
-  // Persiste a última planilha importada para que, ao recarregar a página ou
-  // abrir o link, os últimos valores importados já estejam disponíveis.
+  // 1. Carrega dados do Supabase na inicialização
+  useEffect(() => {
+    let isMounted = true;
+    async function loadCloudData() {
+      setIsCloudSyncing(true);
+      try {
+        const cloudDataset = await fetchLatestFinanceDataset();
+        if (isMounted && cloudDataset) {
+          setDataset(cloudDataset);
+          setSelection(getDefaultSelection(cloudDataset));
+          setStatus("ready");
+          try {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(cloudDataset));
+          } catch {
+            // Silently ignore storage quota
+          }
+        }
+      } catch (err) {
+        console.warn("[FinanceStore] Erro ao sincronizar dados da nuvem:", err);
+      } finally {
+        if (isMounted) setIsCloudSyncing(false);
+      }
+    }
+
+    void loadCloudData();
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
+  // 2. Inscreve no canal Realtime do Supabase para refletir novos uploads ao vivo
+  useEffect(() => {
+    const unsubscribe = subscribeToFinanceUpdates((newDataset, fileName) => {
+      setDataset(newDataset);
+      setSelection(getDefaultSelection(newDataset));
+      setStatus("ready");
+      setSuccessMessage(`Novos dados sincronizados em tempo real (${fileName}).`);
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(newDataset));
+      } catch {
+        // Silently ignore
+      }
+    });
+
+    return () => {
+      unsubscribe();
+    };
+  }, []);
+
+  // 3. Atualiza cache local quando dataset é alterado
   useEffect(() => {
     try {
       if (dataset) {
@@ -79,6 +146,24 @@ export function FinanceProvider({ children }: { children: ReactNode }) {
     }
   }, [dataset]);
 
+  const refreshFromCloud = useCallback(async () => {
+    setIsCloudSyncing(true);
+    setErrorMessage(null);
+    try {
+      const cloudDataset = await fetchLatestFinanceDataset();
+      if (cloudDataset) {
+        setDataset(cloudDataset);
+        setSelection(getDefaultSelection(cloudDataset));
+        setStatus("ready");
+        setSuccessMessage("Dados atualizados a partir da nuvem com sucesso.");
+      }
+    } catch {
+      setErrorMessage("Não foi possível atualizar dados da nuvem.");
+    } finally {
+      setIsCloudSyncing(false);
+    }
+  }, []);
+
   const importFile = useCallback(
     async (file: File) => {
       setStatus("loading");
@@ -87,16 +172,25 @@ export function FinanceProvider({ children }: { children: ReactNode }) {
       try {
         const parsed = await parseDfcWorkbook(file);
         setDataset(parsed);
-        setSelection({ id: "this-year" });
+        setSelection(getDefaultSelection(parsed));
         setStatus("ready");
-        setSuccessMessage("Dados financeiros atualizados com sucesso.");
+        setSuccessMessage("Dados financeiros importados localmente. Salvando na nuvem...");
+
+        // Persiste no Supabase
+        const result = await saveFinanceDataset(file.name, parsed);
+        if (result.success) {
+          setSuccessMessage("Dados financeiros salvos na nuvem e sincronizados em tempo real!");
+        } else {
+          setSuccessMessage(
+            "Dados carregados na sessão atual (falha temporária ao sincronizar com nuvem).",
+          );
+        }
       } catch (error) {
         const message =
           error instanceof ImportError
             ? error.message
             : "Não foi possível importar a planilha. Verifique o arquivo e tente novamente.";
         setErrorMessage(message);
-        // Dados atuais são preservados em caso de erro.
         setStatus((prev) => (prev === "loading" ? (dataset ? "ready" : "empty") : prev));
       }
     },
@@ -117,6 +211,7 @@ export function FinanceProvider({ children }: { children: ReactNode }) {
     () => ({
       dataset,
       status: errorMessage && !dataset ? "error" : status,
+      isCloudSyncing,
       errorMessage,
       successMessage,
       selection,
@@ -125,10 +220,12 @@ export function FinanceProvider({ children }: { children: ReactNode }) {
       periodKeys,
       previousKeys,
       importFile,
+      refreshFromCloud,
     }),
     [
       dataset,
       status,
+      isCloudSyncing,
       errorMessage,
       successMessage,
       selection,
@@ -136,6 +233,7 @@ export function FinanceProvider({ children }: { children: ReactNode }) {
       periodKeys,
       previousKeys,
       importFile,
+      refreshFromCloud,
     ],
   );
 
