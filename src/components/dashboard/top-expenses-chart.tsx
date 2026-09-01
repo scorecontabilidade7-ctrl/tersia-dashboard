@@ -83,7 +83,7 @@ export function TopExpensesChart() {
       </div>
 
       {/* Área do Gráfico */}
-      <div className="h-80 w-full">
+      <div className="h-[340px] w-full">
         {!hasData ? (
           <div className="flex h-full items-center justify-center text-center text-sm text-muted-foreground">
             {dataset
@@ -94,7 +94,7 @@ export function TopExpensesChart() {
           <ResponsiveContainer width="100%" height="100%">
             <BarChart
               data={data}
-              margin={{ top: 10, right: 15, left: 0, bottom: 40 }}
+              margin={{ top: 10, right: 15, left: 0, bottom: 65 }}
               barCategoryGap="25%"
             >
               <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="var(--border)" />
@@ -106,7 +106,7 @@ export function TopExpensesChart() {
                 interval={0}
                 angle={-30}
                 textAnchor="end"
-                height={60}
+                height={75}
               />
               <YAxis
                 tickFormatter={(v: number) => formatBRLCompact(v)}

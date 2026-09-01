@@ -131,7 +131,7 @@ export function PerformanceChart() {
       </div>
 
       {/* Área do Gráfico */}
-      <div className="h-72 w-full">
+      <div className="h-[340px] w-full">
         {!hasData ? (
           <div className="flex h-full items-center justify-center text-center text-sm text-muted-foreground">
             {dataset

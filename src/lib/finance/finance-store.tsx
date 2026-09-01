@@ -9,7 +9,13 @@ import {
 } from "react";
 import { parseDfcWorkbook } from "./parse-dfc";
 import { ImportError, type FinanceDataset, type Period } from "./types";
-import { resolvePeriods, previousWindow, type PeriodSelection } from "./selectors";
+import {
+  resolvePeriods,
+  previousWindow,
+  sumSeries,
+  totalDespesas,
+  type PeriodSelection,
+} from "./selectors";
 import {
   fetchLatestFinanceDataset,
   saveFinanceDataset,
@@ -58,11 +64,23 @@ function loadStoredDataset(): FinanceDataset | null {
   }
 }
 
-/** Obtém a seleção padrão: o mês mais recente disponível com dados na planilha. */
+/** Obtém a seleção padrão: o mês mais recente disponível que realmente possui dados/movimentação financeira. */
 function getDefaultSelection(dataset: FinanceDataset | null): PeriodSelection {
   if (!dataset || !Array.isArray(dataset.periods) || dataset.periods.length === 0) {
     return { id: "this-year" };
   }
+
+  // Percorre os períodos do final para o início procurando o primeiro com receitas ou despesas preenchidas
+  for (let i = dataset.periods.length - 1; i >= 0; i--) {
+    const p = dataset.periods[i];
+    const rec = sumSeries(dataset.receitas, [p.key]);
+    const desp = totalDespesas(dataset, [p.key]);
+    if (Math.abs(rec) > 0.005 || Math.abs(desp) > 0.005) {
+      return { id: "custom", from: p.key, to: p.key };
+    }
+  }
+
+  // Caso nenhum mês tenha movimentação registrada, seleciona o último período
   const latest = dataset.periods[dataset.periods.length - 1];
   return { id: "custom", from: latest.key, to: latest.key };
 }
