@@ -46,6 +46,7 @@ const STORAGE_KEY = "tersia-dashboard-dataset:v1";
 
 /** Tenta carregar a última planilha importada do armazenamento local. */
 function loadStoredDataset(): FinanceDataset | null {
+  if (typeof window === "undefined") return null;
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
     if (!raw) return null;
