@@ -77,23 +77,23 @@ export function PainelProcedimentosAccordion({
       <button
         type="button"
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full flex items-center justify-between p-5 md:p-6 text-left hover:bg-muted/30 transition-colors cursor-pointer"
+        className="w-full flex items-center justify-between p-4 sm:p-5 md:p-6 text-left hover:bg-muted/30 transition-colors cursor-pointer"
       >
         <div className="flex items-center gap-3">
-          <div className="grid h-10 w-10 place-items-center rounded-2xl bg-primary/15 text-primary">
+          <div className="grid h-10 w-10 place-items-center rounded-2xl bg-primary/15 text-primary shrink-0">
             <Stethoscope className="h-5 w-5" />
           </div>
           <div>
-            <h3 className="text-base font-bold text-foreground">
+            <h3 className="text-sm sm:text-base font-bold text-foreground">
               Procedimentos Realizados (Visão Consolidada)
             </h3>
             <p className="text-xs text-muted-foreground">
-              Gráfico oficial de distribuição por procedimento · Total: {totalProcs} execuções
+              Distribuição por procedimento · Total: {totalProcs} execuções
             </p>
           </div>
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 shrink-0">
           <span className="text-xs font-bold text-primary hidden sm:inline">
             {totalProcs} procedimentos
           </span>
@@ -105,10 +105,10 @@ export function PainelProcedimentosAccordion({
 
       {/* Accordion Body */}
       {isOpen && (
-        <div className="px-5 pb-6 md:px-6 space-y-6 border-t border-border/40 pt-5">
+        <div className="px-3.5 pb-5 sm:px-5 sm:pb-6 md:px-6 space-y-6 border-t border-border/40 pt-4">
           {/* SEÇÃO 1: GRÁFICO DE ROSCA OFICIAL 4MEDIC + LEGENDA */}
           {donutData.length > 0 && (
-            <div className="flex flex-col lg:flex-row items-center justify-between gap-6 p-5 rounded-3xl bg-muted/20 border border-border/50">
+            <div className="flex flex-col lg:flex-row items-center justify-between gap-6 p-4 sm:p-5 rounded-2xl sm:rounded-3xl bg-muted/20 border border-border/50">
               {/* Gráfico de Rosca com Centro Interativo Inteligente (Zero Sobreposição) */}
               <div className="relative w-full max-w-[280px] h-[220px] flex items-center justify-center">
                 <ResponsiveContainer width="100%" height="100%">
@@ -287,14 +287,14 @@ export function PainelProcedimentosAccordion({
                 </p>
               </div>
 
-              <div className="flex flex-wrap items-center gap-2.5">
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 w-full md:w-auto">
                 {/* Switcher de Visão: Lista Paginada vs Ver Ranking */}
-                <div className="inline-flex rounded-2xl bg-muted/60 p-1 border border-border/50 shadow-2xs">
+                <div className="grid grid-cols-2 gap-1 rounded-2xl bg-muted/60 p-1 border border-border/50 shadow-2xs w-full sm:w-auto">
                   <button
                     type="button"
                     onClick={() => setViewMode("lista")}
                     className={cn(
-                      "px-3 py-1.5 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer",
+                      "px-3 py-1.5 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer",
                       viewMode === "lista"
                         ? "bg-card text-foreground shadow-xs"
                         : "text-muted-foreground hover:text-foreground",
@@ -307,20 +307,20 @@ export function PainelProcedimentosAccordion({
                     type="button"
                     onClick={() => setViewMode("ranking")}
                     className={cn(
-                      "px-3 py-1.5 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer",
+                      "px-3 py-1.5 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer",
                       viewMode === "ranking"
                         ? "bg-primary text-primary-foreground shadow-xs"
                         : "text-muted-foreground hover:text-foreground",
                     )}
                   >
                     <Trophy className="h-3.5 w-3.5" />
-                    <span>Ver Ranking (Top 5)</span>
+                    <span>Top 5</span>
                   </button>
                 </div>
 
                 {/* Campo de Busca (Apenas na visão lista) */}
                 {viewMode === "lista" && (
-                  <div className="relative max-w-xs w-full">
+                  <div className="relative w-full sm:max-w-xs">
                     <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-muted-foreground" />
                     <Input
                       value={searchTerm}
@@ -329,7 +329,7 @@ export function PainelProcedimentosAccordion({
                         setCurrentPage(1);
                       }}
                       placeholder="Filtrar por nome..."
-                      className="pl-8 h-8 text-xs rounded-xl bg-muted/30 border-border/60"
+                      className="pl-8 h-9 text-xs rounded-xl bg-muted/30 border-border/60 w-full"
                     />
                   </div>
                 )}

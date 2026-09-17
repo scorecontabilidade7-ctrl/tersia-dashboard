@@ -60,19 +60,19 @@ export function AppointmentsView() {
   return (
     <div className="space-y-6">
       {/* Barra de Filtros e Controles do Painel 4Medic */}
-      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 rounded-3xl border border-border/60 bg-card p-4 md:p-5 shadow-2xs">
+      <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 rounded-3xl border border-border/60 bg-card p-3.5 sm:p-5 shadow-2xs">
         {/* Seletor de Profissional (Dra. Térsia como padrão) */}
-        <div className="flex flex-wrap items-center gap-2">
-          <span className="text-xs font-bold text-muted-foreground mr-1 flex items-center gap-1.5">
+        <div className="flex flex-col sm:flex-row sm:items-center gap-2 w-full lg:w-auto">
+          <span className="text-xs font-bold text-muted-foreground flex items-center gap-1.5 shrink-0">
             <User className="h-3.5 w-3.5 text-primary" />
             Profissional:
           </span>
-          <div className="inline-flex rounded-2xl bg-muted/60 p-1 border border-border/50">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-1 rounded-2xl bg-muted/60 p-1 border border-border/50 w-full sm:w-auto">
             <button
               type="button"
               onClick={() => setFilterProfessional("tersia")}
               className={cn(
-                "px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer",
+                "px-3 py-2 sm:py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer text-center",
                 filterProfessional === "tersia"
                   ? "bg-primary text-primary-foreground shadow-xs"
                   : "text-muted-foreground hover:text-foreground",
@@ -84,7 +84,7 @@ export function AppointmentsView() {
               type="button"
               onClick={() => setFilterProfessional("pedro")}
               className={cn(
-                "px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer",
+                "px-3 py-2 sm:py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer text-center",
                 filterProfessional === "pedro"
                   ? "bg-primary text-primary-foreground shadow-xs"
                   : "text-muted-foreground hover:text-foreground",
@@ -96,7 +96,7 @@ export function AppointmentsView() {
               type="button"
               onClick={() => setFilterProfessional("todos")}
               className={cn(
-                "px-3 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer",
+                "px-3 py-2 sm:py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer text-center",
                 filterProfessional === "todos"
                   ? "bg-primary text-primary-foreground shadow-xs"
                   : "text-muted-foreground hover:text-foreground",
@@ -108,14 +108,14 @@ export function AppointmentsView() {
         </div>
 
         {/* Controles de Data e Atualização */}
-        <div className="flex flex-wrap items-center gap-2.5">
+        <div className="flex items-center justify-between sm:justify-start gap-2 w-full lg:w-auto">
           {/* Seletor de Mês */}
-          <div className="flex items-center gap-1.5">
-            <Calendar className="h-3.5 w-3.5 text-muted-foreground" />
+          <div className="flex-1 sm:flex-initial flex items-center gap-1.5 min-w-[120px]">
+            <Calendar className="h-3.5 w-3.5 text-muted-foreground shrink-0" />
             <select
               value={mes}
               onChange={(e) => setMes(Number(e.target.value))}
-              className="h-9 rounded-xl border border-border/70 bg-background/80 px-3 text-xs font-bold text-foreground focus:outline-none focus:ring-1 focus:ring-primary cursor-pointer"
+              className="h-9 w-full rounded-xl border border-border/70 bg-background/80 px-2.5 text-xs font-bold text-foreground focus:outline-none focus:ring-1 focus:ring-primary cursor-pointer"
             >
               {MONTHS.map((m) => (
                 <option key={m.value} value={m.value}>
@@ -129,7 +129,7 @@ export function AppointmentsView() {
           <select
             value={ano}
             onChange={(e) => setAno(Number(e.target.value))}
-            className="h-9 rounded-xl border border-border/70 bg-background/80 px-3 text-xs font-bold text-foreground focus:outline-none focus:ring-1 focus:ring-primary cursor-pointer"
+            className="h-9 rounded-xl border border-border/70 bg-background/80 px-2.5 text-xs font-bold text-foreground focus:outline-none focus:ring-1 focus:ring-primary cursor-pointer shrink-0"
           >
             {YEARS.map((y) => (
               <option key={y} value={y}>
@@ -144,7 +144,7 @@ export function AppointmentsView() {
             size="sm"
             onClick={refresh}
             disabled={isFetching}
-            className="h-9 rounded-xl border-border/80 text-xs font-bold gap-1.5 cursor-pointer shadow-2xs"
+            className="h-9 rounded-xl border-border/80 text-xs font-bold gap-1.5 cursor-pointer shadow-2xs shrink-0 px-3"
             title={isAdmin ? "Atualizar dados da API 4Medic" : "Atualizar agendamentos"}
           >
             <RefreshCw
@@ -157,20 +157,20 @@ export function AppointmentsView() {
 
           {/* Badge de Conexão Ativa - Exibido apenas para Administradores */}
           {isAdmin && (
-            <div className="hidden sm:flex items-center gap-1.5 rounded-xl border border-emerald-500/30 bg-emerald-500/10 px-2.5 py-1.5 text-[11px] font-bold text-emerald-600 dark:text-emerald-400">
+            <div className="hidden xl:flex items-center gap-1.5 rounded-xl border border-emerald-500/30 bg-emerald-500/10 px-2.5 py-1.5 text-[11px] font-bold text-emerald-600 dark:text-emerald-400 shrink-0">
               <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
-              <span>4Medic Painel Ativo</span>
+              <span>4Medic Ativo</span>
             </div>
           )}
         </div>
       </div>
 
       {/* Alerta informativo sobre o período consultado */}
-      <div className="flex items-center justify-between gap-3 rounded-2xl bg-muted/40 border border-border/50 px-4 py-2.5 text-xs text-muted-foreground">
-        <div className="flex items-center gap-2 min-w-0">
-          <Info className="h-4 w-4 text-primary shrink-0" />
-          <span className="truncate">
-            Período consultado:{" "}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 rounded-2xl bg-muted/40 border border-border/50 p-3 sm:px-4 sm:py-2.5 text-xs text-muted-foreground">
+        <div className="flex items-start sm:items-center gap-2 min-w-0">
+          <Info className="h-4 w-4 text-primary shrink-0 mt-0.5 sm:mt-0" />
+          <div className="leading-relaxed">
+            Período:{" "}
             <strong className="text-foreground">
               {dateRange.dataInicial} até {dateRange.dataFinal}
             </strong>{" "}
@@ -182,11 +182,11 @@ export function AppointmentsView() {
                   ? "Dr. Pedro Paulo"
                   : "Todos os profissionais"}
             </strong>
-          </span>
+          </div>
         </div>
-        <span className="font-semibold text-primary shrink-0 hidden sm:inline">
+        <div className="text-left sm:text-right font-semibold text-primary shrink-0 text-[11px]">
           {summary.totalAtendidos} atendimentos concluídos ({summary.taxaComparecimento.toFixed(1)}% taxa de presença)
-        </span>
+        </div>
       </div>
 
       {/* Erro de conexão se houver */}

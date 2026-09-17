@@ -124,17 +124,17 @@ function DashboardPage() {
           sidebarCollapsed ? "md:pl-0" : "md:pl-64 lg:pl-72",
         )}
       >
-        <main className="flex-1 px-4 py-6 md:px-8 md:py-8">
+        <main className="flex-1 px-3.5 py-4 sm:px-6 sm:py-6 md:px-8 md:py-8 max-w-full overflow-x-hidden">
           {/* Header Superior Dinâmico */}
-          <header className="flex flex-col gap-4 mb-6 md:flex-row md:items-center md:justify-between pb-2 border-b border-border/40">
-            <div className="flex items-center gap-3.5">
+          <header className="flex flex-col gap-3 mb-5 sm:mb-6 sm:flex-row sm:items-center sm:justify-between pb-3 border-b border-border/40">
+            <div className="flex items-start sm:items-center gap-3 min-w-0">
               {/* Botão para reabrir a Sidebar quando estiver recolhida no Desktop */}
               {sidebarCollapsed && (
                 <Button
                   variant="outline"
                   size="sm"
                   onClick={handleToggleSidebar}
-                  className="hidden md:flex items-center gap-2 rounded-2xl border-border/80 bg-card px-3 py-2 text-xs font-bold text-foreground hover:bg-muted cursor-pointer shadow-2xs animate-in fade-in duration-200"
+                  className="hidden md:flex items-center gap-2 rounded-2xl border-border/80 bg-card px-3 py-2 text-xs font-bold text-foreground hover:bg-muted cursor-pointer shadow-2xs animate-in fade-in duration-200 shrink-0"
                   title="Expandir menu lateral"
                 >
                   <PanelLeftOpen className="h-4 w-4 text-primary" />
@@ -142,7 +142,7 @@ function DashboardPage() {
                 </Button>
               )}
 
-              <div className="grid h-11 w-11 place-items-center rounded-2xl bg-gradient-to-br from-primary to-primary/85 text-primary-foreground shadow-sm shadow-primary/25 shrink-0 ring-2 ring-primary/20">
+              <div className="grid h-10 w-10 sm:h-11 sm:w-11 place-items-center rounded-2xl bg-gradient-to-br from-primary to-primary/85 text-primary-foreground shadow-sm shadow-primary/25 shrink-0 ring-2 ring-primary/20">
                 {activeModule === "financeiro" ? (
                   <LayoutDashboard className="h-5 w-5" />
                 ) : activeModule === "agendamentos" ? (
@@ -151,8 +151,8 @@ function DashboardPage() {
                   <Users className="h-5 w-5" />
                 )}
               </div>
-              <div>
-                <h1 className="text-2xl md:text-3xl font-black tracking-tight text-foreground">
+              <div className="min-w-0 flex-1">
+                <h1 className="text-xl sm:text-2xl md:text-3xl font-black tracking-tight text-foreground leading-snug">
                   {activeModule === "financeiro"
                     ? "Painel Financeiro"
                     : activeModule === "agendamentos"
@@ -161,7 +161,7 @@ function DashboardPage() {
                         : "Painel de Agendamentos"
                       : "Gestão de Usuários & Acessos"}
                 </h1>
-                <p className="text-xs md:text-sm font-medium text-muted-foreground mt-0.5">
+                <p className="text-xs sm:text-sm font-medium text-muted-foreground mt-0.5 leading-relaxed">
                   {activeModule === "financeiro"
                     ? "Gestão executiva, KPIs e DRE em tempo real"
                     : activeModule === "agendamentos"
@@ -174,7 +174,7 @@ function DashboardPage() {
             </div>
 
             {/* Controles do Topo */}
-            <div className="flex flex-wrap items-center gap-3">
+            <div className="flex flex-wrap items-center gap-2 sm:gap-3">
               {activeModule === "financeiro" && <PeriodFilter />}
               {/* Nuvem Supabase Ativa: Exibida APENAS para Administradores */}
               {isAdmin && (

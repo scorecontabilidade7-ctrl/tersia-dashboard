@@ -29,14 +29,14 @@ export function PainelConveniosAccordion({
       <button
         type="button"
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full flex items-center justify-between p-5 md:p-6 text-left hover:bg-muted/30 transition-colors cursor-pointer"
+        className="w-full flex items-center justify-between p-4 sm:p-5 md:p-6 text-left hover:bg-muted/30 transition-colors cursor-pointer"
       >
         <div className="flex items-center gap-3">
-          <div className="grid h-10 w-10 place-items-center rounded-2xl bg-emerald-500/15 text-emerald-600 dark:text-emerald-400">
+          <div className="grid h-10 w-10 place-items-center rounded-2xl bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 shrink-0">
             <ShieldCheck className="h-5 w-5" />
           </div>
           <div>
-            <h3 className="text-base font-bold text-foreground">
+            <h3 className="text-sm sm:text-base font-bold text-foreground">
               Atendimentos Convênio / Particular
             </h3>
             <p className="text-xs text-muted-foreground">
@@ -45,7 +45,7 @@ export function PainelConveniosAccordion({
           </div>
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 shrink-0">
           <span className="text-xs font-bold text-muted-foreground hidden sm:inline">
             {convenios.length} {convenios.length === 1 ? "tipo" : "tipos"}
           </span>
@@ -57,7 +57,7 @@ export function PainelConveniosAccordion({
 
       {/* Accordion Body */}
       {isOpen && (
-        <div className="px-5 pb-6 md:px-6 space-y-5 border-t border-border/40 pt-4">
+        <div className="px-3.5 pb-5 sm:px-5 sm:pb-6 md:px-6 space-y-5 border-t border-border/40 pt-4">
           {/* Barra de Distribuição Segmentada */}
           <div className="space-y-2">
             <div className="flex h-3.5 w-full overflow-hidden rounded-full bg-muted/60 p-0.5">

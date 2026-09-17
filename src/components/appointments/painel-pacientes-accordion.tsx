@@ -85,21 +85,21 @@ export function PainelPacientesAccordion({
       <button
         type="button"
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full flex items-center justify-between p-5 md:p-6 text-left hover:bg-muted/30 transition-colors cursor-pointer"
+        className="w-full flex items-center justify-between p-4 sm:p-5 md:p-6 text-left hover:bg-muted/30 transition-colors cursor-pointer"
       >
         <div className="flex items-center gap-3">
-          <div className="grid h-10 w-10 place-items-center rounded-2xl bg-purple-500/15 text-purple-600 dark:text-purple-400">
+          <div className="grid h-10 w-10 place-items-center rounded-2xl bg-purple-500/15 text-purple-600 dark:text-purple-400 shrink-0">
             <Users className="h-5 w-5" />
           </div>
           <div>
-            <h3 className="text-base font-bold text-foreground">Pacientes & Consultas</h3>
+            <h3 className="text-sm sm:text-base font-bold text-foreground">Pacientes & Consultas</h3>
             <p className="text-xs text-muted-foreground">
-              {pacientes.length} pacientes atendidos · Grade completa de consultas
+              {pacientes.length} pacientes atendidos · Grade de consultas
             </p>
           </div>
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 shrink-0">
           <span className="text-xs font-bold text-muted-foreground hidden sm:inline">
             {filtered.length} {filtered.length === 1 ? "registro" : "registros"}
           </span>
@@ -111,11 +111,11 @@ export function PainelPacientesAccordion({
 
       {/* Accordion Body */}
       {isOpen && (
-        <div className="px-5 pb-6 md:px-6 space-y-4 border-t border-border/40 pt-4">
+        <div className="px-3.5 pb-5 sm:px-5 sm:pb-6 md:px-6 space-y-4 border-t border-border/40 pt-4">
           {/* Controles de Filtro e Busca */}
           <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
             {/* Seletor de visualização */}
-            <div className="inline-flex rounded-2xl bg-muted/60 p-1 border border-border/50 text-xs">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-1 rounded-2xl bg-muted/60 p-1 border border-border/50 text-xs w-full sm:w-auto">
               <button
                 type="button"
                 onClick={() => {
@@ -123,7 +123,7 @@ export function PainelPacientesAccordion({
                   setCurrentPage(1);
                 }}
                 className={cn(
-                  "px-3 py-1.5 rounded-xl font-bold transition-all cursor-pointer",
+                  "px-3 py-2 sm:py-1.5 rounded-xl font-bold transition-all cursor-pointer text-center",
                   viewFilter === "atendidos"
                     ? "bg-primary text-primary-foreground shadow-xs"
                     : "text-muted-foreground hover:text-foreground",
@@ -138,7 +138,7 @@ export function PainelPacientesAccordion({
                   setCurrentPage(1);
                 }}
                 className={cn(
-                  "px-3 py-1.5 rounded-xl font-bold transition-all cursor-pointer",
+                  "px-3 py-2 sm:py-1.5 rounded-xl font-bold transition-all cursor-pointer text-center",
                   viewFilter === "todos"
                     ? "bg-primary text-primary-foreground shadow-xs"
                     : "text-muted-foreground hover:text-foreground",
@@ -153,7 +153,7 @@ export function PainelPacientesAccordion({
                   setCurrentPage(1);
                 }}
                 className={cn(
-                  "px-3 py-1.5 rounded-xl font-bold transition-all cursor-pointer",
+                  "px-3 py-2 sm:py-1.5 rounded-xl font-bold transition-all cursor-pointer text-center",
                   viewFilter === "faltas_cancelados"
                     ? "bg-primary text-primary-foreground shadow-xs"
                     : "text-muted-foreground hover:text-foreground",
@@ -164,7 +164,7 @@ export function PainelPacientesAccordion({
             </div>
 
             {/* Busca rápida */}
-            <div className="relative max-w-xs w-full">
+            <div className="relative w-full sm:max-w-xs">
               <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
               <Input
                 value={searchTerm}
@@ -180,7 +180,7 @@ export function PainelPacientesAccordion({
 
           {/* Tabela de Pacientes */}
           <div className="overflow-x-auto rounded-2xl border border-border/60 bg-card">
-            <table className="w-full text-left text-xs border-collapse">
+            <table className="w-full min-w-[550px] text-left text-xs border-collapse">
               <thead>
                 <tr className="border-b border-border/60 bg-muted/40 text-[11px] font-bold uppercase tracking-wider text-muted-foreground">
                   <th className="py-3 px-4">Data/Hora</th>
