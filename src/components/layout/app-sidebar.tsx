@@ -1,6 +1,7 @@
 import { useState } from "react";
 import {
   LayoutDashboard,
+  CalendarDays,
   Users,
   LogOut,
   Shield,
@@ -13,7 +14,7 @@ import { Button } from "@/components/ui/button";
 import { useAuth } from "@/lib/auth/auth-context";
 import { cn } from "@/lib/utils";
 
-export type NavModule = "financeiro" | "usuarios";
+export type NavModule = "financeiro" | "agendamentos" | "usuarios";
 
 interface AppSidebarProps {
   activeModule: NavModule;
@@ -52,9 +53,15 @@ export function AppSidebar({
   const navItems = [
     {
       id: "financeiro" as NavModule,
-      label: "Financeiro",
+      label: "Painel Financeiro",
       description: "KPIs, DRE e Despesas",
       icon: LayoutDashboard,
+    },
+    {
+      id: "agendamentos" as NavModule,
+      label: "Agendamentos",
+      description: isAdmin ? "Painel 4Medic & Pacientes" : "Consultas & Pacientes",
+      icon: CalendarDays,
     },
     {
       id: "usuarios" as NavModule,

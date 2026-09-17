@@ -150,10 +150,10 @@ export function ImportPlanilha() {
           disabled={isCloudSyncing || loading}
           className={`${isAdmin ? "" : "w-full"} gap-2 text-muted-foreground hover:text-foreground`}
           onClick={() => void refreshFromCloud()}
-          title="Verificar atualizações no Supabase"
+          title={isAdmin ? "Verificar atualizações no Supabase" : "Verificar novas atualizações"}
         >
           <RefreshCw className={`h-4 w-4 ${isCloudSyncing ? "animate-spin text-primary" : ""}`} />
-          {isCloudSyncing ? "Sincronizando..." : "Sincronizar Nuvem"}
+          {isCloudSyncing ? "Sincronizando..." : isAdmin ? "Sincronizar Nuvem" : "Sincronizar Dados"}
         </Button>
       </div>
 

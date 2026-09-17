@@ -20,6 +20,13 @@ dist-ssr
 !.env.example
 
 
+# Data / Spreadsheets
+public/*.xlsx
+public/dfc-sample-rows.json
+*.xlsx
+*.xls
+*.csv
+
 # Wrangler / Cloudflare
 .wrangler/
 .dev.vars

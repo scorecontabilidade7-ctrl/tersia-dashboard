@@ -11,6 +11,7 @@ import {
   UserRound,
   Cloud,
   LayoutDashboard,
+  CalendarDays,
   Users,
   PanelLeftOpen,
 } from "lucide-react";
@@ -23,6 +24,7 @@ import { ImportPlanilha } from "@/components/dashboard/import-planilha";
 import { PeriodFilter } from "@/components/dashboard/period-filter";
 import { AppSidebar, type NavModule } from "@/components/layout/app-sidebar";
 import { UserManagementView } from "@/components/auth/user-management-view";
+import { AppointmentsView } from "@/components/appointments/appointments-view";
 import { AuthView } from "@/components/auth/auth-view";
 import { useAuth } from "@/lib/auth/auth-context";
 import { useFinance } from "@/lib/finance/finance-store";
@@ -143,6 +145,8 @@ function DashboardPage() {
               <div className="grid h-11 w-11 place-items-center rounded-2xl bg-gradient-to-br from-primary to-primary/85 text-primary-foreground shadow-sm shadow-primary/25 shrink-0 ring-2 ring-primary/20">
                 {activeModule === "financeiro" ? (
                   <LayoutDashboard className="h-5 w-5" />
+                ) : activeModule === "agendamentos" ? (
+                  <CalendarDays className="h-5 w-5" />
                 ) : (
                   <Users className="h-5 w-5" />
                 )}
@@ -151,14 +155,20 @@ function DashboardPage() {
                 <h1 className="text-2xl md:text-3xl font-black tracking-tight text-foreground">
                   {activeModule === "financeiro"
                     ? "Painel Financeiro"
-                    : "Gestão de Usuários & Acessos"}
+                    : activeModule === "agendamentos"
+                      ? isAdmin
+                        ? "Painel de Agendamentos (4Medic)"
+                        : "Painel de Agendamentos"
+                      : "Gestão de Usuários & Acessos"}
                 </h1>
                 <p className="text-xs md:text-sm font-medium text-muted-foreground mt-0.5">
                   {activeModule === "financeiro"
                     ? "Gestão executiva, KPIs e DRE em tempo real"
-                    : isAdmin
-                      ? "Controle de membros, cargos e permissões da clínica"
-                      : "Informações da sua conta e nível de acesso"}
+                    : activeModule === "agendamentos"
+                      ? "Pacientes agendados, confirmados, atendidos e procedimentos da Dra. Térsia"
+                      : isAdmin
+                        ? "Controle de membros, cargos e permissões da clínica"
+                        : "Informações da sua conta e nível de acesso"}
                 </p>
               </div>
             </div>
@@ -335,6 +345,9 @@ function DashboardPage() {
               )}
             </div>
           )}
+
+          {/* Módulo Agendamentos (Painel 4Medic) */}
+          {activeModule === "agendamentos" && <AppointmentsView />}
 
           {/* Módulo Usuários */}
           {activeModule === "usuarios" && <UserManagementView />}
